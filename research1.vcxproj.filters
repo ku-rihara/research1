@@ -14,6 +14,42 @@
     <Filter Include="KamataEngine\Adapter">
       <UniqueIdentifier>{c6468eb4-788b-4a83-b207-a5f4804e56c5}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Vector">
+      <UniqueIdentifier>{d4eb50c9-c31a-49de-89ce-8d89f92520db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{72219456-f8cb-485d-9027-185a52d8c52d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera">
+      <UniqueIdentifier>{27575645-d7e4-434c-ab4f-f25b6693ab60}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Function">
+      <UniqueIdentifier>{bd182673-572a-4d3c-b194-bfc587ee0765}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{a392f144-21cb-40dd-8e11-da60c4da53c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Function\.cpp">
+      <UniqueIdentifier>{717ce9aa-2b6f-4ca6-acf7-4b2eb8443c44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Function\.h">
+      <UniqueIdentifier>{65fd69bf-2e7b-4f97-a63f-5323f11dbf0e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\.cpp">
+      <UniqueIdentifier>{9d797a3b-0d9d-447b-a7ea-ab9a81e960b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene\.h">
+      <UniqueIdentifier>{56a8820e-0557-451f-93b0-cb7eedf8d64a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\.cpp">
+      <UniqueIdentifier>{36ae23c6-742d-4b72-b7ef-d2b64b277139}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\.h">
+      <UniqueIdentifier>{33c3d4ba-4e60-4eb4-9830-42762398de83}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MapChip">
+      <UniqueIdentifier>{3e1c8e18-65bd-4c5b-83d9-b3f4df26b9fe}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -37,6 +73,48 @@
     </ClCompile>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\StringUtility.cpp">
       <Filter>KamataEngine\Source</Filter>
+    </ClCompile>
+    <ClCompile Include="Vector2C.cpp">
+      <Filter>Vector</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>KamataEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="BoxRelated.cpp">
+      <Filter>Function\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Easing.cpp">
+      <Filter>Function\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Function.cpp">
+      <Filter>Function\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Function\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix3x3.cpp">
+      <Filter>Function\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseScene.cpp">
+      <Filter>Scene\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Scene\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="ScenePrototype.cpp">
+      <Filter>Scene\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseObj.cpp">
+      <Filter>Object\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Object\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="mapchip.cpp">
+      <Filter>MapChip</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -104,12 +182,53 @@
       <Filter>KamataEngine\Include</Filter>
     </ClInclude>
     <ClInclude Include="C:\KamataEngine\DirectXGame\math\Matrix4x4.h" />
-    <ClInclude Include="C:\KamataEngine\DirectXGame\math\Vector2.h" />
+    <ClInclude Include="..\..\..\..\..\KamataEngine\DirectXGame\math\Vector2.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\math\Vector3.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\math\Vector4.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\2d\ImGuiManager.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\base\StringUtility.h">
       <Filter>KamataEngine\Include</Filter>
+    </ClInclude>
+    <ClInclude Include="Vector2C.h">
+      <Filter>Vector</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h" />
+    <ClInclude Include="Camera.h">
+      <Filter>Camera</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h" />
+    <ClInclude Include="BoxRelated.h">
+      <Filter>Function\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Easing.h">
+      <Filter>Function\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Function.h">
+      <Filter>Function\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Function\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Matrix3x3.h">
+      <Filter>Function\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseScene.h">
+      <Filter>Scene\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Scene\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="ScenePrototype.h">
+      <Filter>Scene\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseObj.h">
+      <Filter>Object\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Object\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="mapchip.h">
+      <Filter>MapChip</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

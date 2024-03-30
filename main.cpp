@@ -1,5 +1,9 @@
 #include <Novice.h>
 
+//class
+#include"SceneManager.h"
+#include"BaseScene.h"
+
 const char kWindowTitle[] = "LC1A_12_クリハラ_ケイタ_タイトル";
 
 // Windowsアプリでのエントリーポイント(main関数)
@@ -7,6 +11,9 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 
 	// ライブラリの初期化
 	Novice::Initialize(kWindowTitle, 1280, 720);
+
+	//インスタンスを生成
+	SceneManager* sceneManager = new SceneManager;
 
 	// キー入力結果を受け取る箱
 	char keys[256] = {0};
@@ -24,7 +31,8 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓更新処理ここから
 		///
-
+		sceneManager->CangeScene(sceneManager->scene_);
+		sceneManager->Update();
 		///
 		/// ↑更新処理ここまで
 		///
@@ -32,7 +40,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		///
 		/// ↓描画処理ここから
 		///
-
+		sceneManager->Draw();
 		///
 		/// ↑描画処理ここまで
 		///
