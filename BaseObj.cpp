@@ -1,11 +1,10 @@
-﻿
-#define _USE_MATH_DEFINES
+﻿#define _USE_MATH_DEFINES
 #include"math.h"
 
 //Function
 #include"Matrix3x3.h"
-#include"Easing.h"
-#include"Function.h"
+#include"Map.h"
+
 //class
 #include "BaseObj.h"
 #include"Camera.h"
@@ -93,13 +92,12 @@ void BaseObj::MapChipColligion() {
 			}
 			else {
 				isFlight_ = true;
-				landing_.easingRock = false;
+				/*landing_.easingRock = false;*/
 			}
 
 			//上にぶつかったら加速度と速度を0にする
 			if (mapchip_->map[int(mapNum_.LeftTop.y)][int(mapNum_.LeftTop.x)] == BLOCK || mapchip_->map[int(mapNum_.RightTop.y)][int(mapNum_.RightTop.x)] == BLOCK) {
 				velocity_.y = 0;
-
 			}
 		}
 
@@ -124,26 +122,25 @@ void BaseObj::MapChipColligion() {
 			if (mapchip_->map[int(mapNum_.LeftBottom.y)][int(mapNum_.LeftBottom.x)] == BLOCK || mapchip_->map[int(mapNum_.RightBottom.y)][int(mapNum_.RightBottom.x)] == BLOCK) {
 
 				isFlight_ = false;
-				if (landing_.isEasing == false && landing_.easingRock == false) {
+				/*if (landing_.isEasing == false && landing_.easingRock == false) {
 					landing_.isEasing = true;
 					landing_.easingPlus = 1;
-				}
+				}*/
 			}
 
 			else {
 				isFlight_ = true;
-				landing_.easingRock = false;
+				/*landing_.easingRock = false;*/
 			}
 
 			//上にぶつかったら加速度と速度を0にする
 			if (mapchip_->map[int(mapNum_.LeftTop.y)][int(mapNum_.LeftTop.x)] == BLOCK || mapchip_->map[int(mapNum_.RightTop.y)][int(mapNum_.RightTop.x)] == BLOCK) {
 				velocity_.y = 0;
-
 			}
 		}
 	}
 	else {
 		isFlight_ = true;
-		landing_.easingRock = false;
+		/*landing_.easingRock = false;*/
 	}
 }

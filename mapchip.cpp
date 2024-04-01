@@ -1,19 +1,20 @@
 ﻿#include <Novice.h>
 #include <stdio.h>
+#include"mapchip.h"
 
 //function
 #include"Matrix3x3.h"
 #include "BoxRelated.h"
 
 //class
-#include"mapchip.h"
+
 
 
 Mapchip::Mapchip() {
 	Init();
 	fileLoad();
-	camera_ = new Camera;
-	//mapTexture.Handle = Novice::LoadTexture("./Resources/block.png");//マップ画像
+	camera_ = new Camera();
+	mapTexture.Handle = Novice::LoadTexture("white1x1.png");//マップ画像
 }
 
 void Mapchip::Init() {
@@ -33,7 +34,7 @@ void Mapchip::fileLoad() {
 	//ファイル読み込み
 	FILE* fp = NULL;
 
-	if (fopen_s(&fp, "./Resources/map.csv", "rt") != 0) {
+	if (fopen_s(&fp, "./Map/mapSample1.csv", "rt") != 0) {
 		return;
 	}
 	int numRects = 0;
@@ -82,9 +83,20 @@ void Mapchip::Update() {
 			pos_[y][x].x = float(x * size_) + (size_ / 2);
 			pos_[y][x].y = float(y * size_) + (size_ / 2);
 
+			
+		}
+	}
+}
+
+void Mapchip::RenderingPipeline() {
+	for (int y = 0; y < mapyMax; y++) {
+		for (int x = 0; x < mapxMax; x++) {
 			//マップチップ行列の作成
+			camera_->MakeCamelaMatrix();
 			matrix_[y][x] = MakeAffineMatrix(scale_, 0, pos_[y][x]);
 			wvMatrix_[y][x] = Multiply(matrix_[y][x], camera_->GetViewMatrix());
+			//スクリーンに変換＆描画
+			ScreenVertex_[y][x] = Transform(localVertex_, wvMatrix_[y][x]);
 		}
 	}
 }
@@ -92,15 +104,12 @@ void Mapchip::Update() {
 void Mapchip::Draw() {
 
 	//スクロール座標の取得
-	scrollPos_ = camera_->GetPos();
+	scrollPos_ = Camera::pos_;
 
 	for (int y = 0; y < mapyMax; y++) {
-		for (int x = 0; x < mapxMax; x++) {
-			//スクリーンに変換＆描画
-			ScreenVertex_[y][x] = Transform(localVertex_, wvMatrix_[y][x]);
-
+		for (int x = 0; x < mapxMax; x++) {	
 			//画面内のみ描画する
-			if (pos_[y][x].x - scrollPos_.x >= -size_ * camera_->GetZoomLevel().x && pos_[y][x].x - scrollPos_.x <= (kWindowSizeX + size_) * camera_->GetZoomLevel().x && pos_[y][x].y - scrollPos_.y >= -size_ * camera_->GetZoomLevel().y && pos_[y][x].y - scrollPos_.y <= (kWindowSizeY + size_) * camera_->GetZoomLevel().y) {
+			if (pos_[y][x].x - scrollPos_.x >= -size_ * Camera::zoomLevel_.x && pos_[y][x].x - scrollPos_.x <= (kWindowSizeX + size_) * Camera::zoomLevel_.x && pos_[y][x].y - scrollPos_.y >= -size_ * Camera::zoomLevel_.y && pos_[y][x].y - scrollPos_.y <= (kWindowSizeY + size_) * Camera::zoomLevel_.y) {
 				if (map[y][x] == BLOCK) {
 					newDrawQuad(ScreenVertex_[y][x], 0, 0, size_, size_, mapTexture.Handle, WHITE);
 				}

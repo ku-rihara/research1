@@ -7,6 +7,9 @@
 //class
 #include"Camera.h"
 
+Vector2 Camera::pos_;
+Vector2 Camera::zoomLevel_;
+
 Camera::Camera() {
 	Init();
 }

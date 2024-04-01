@@ -11,8 +11,17 @@ protected:
 	//包含
 	Camera* camera_;
 	Mapchip* mapchip_;
+
 	//座標
 	Vector2 worldPos_;
+	Vector2 oldWorldPos_;
+	Vector2i fitMapsizePos_;
+
+	//Mapnum
+	Vector2 centerMapNum_;
+	Vertex mapNum_;
+	Vertex oldMapNum_;
+	bool isFlight_;
 
 	//Parameter
 	Vector2 velocity_;
@@ -27,9 +36,7 @@ protected:
 	Vertex localVertex_;
 	Matrix3x3 matrix_;
 	Matrix3x3 wvpVpMatrix_;
-
 public:
-
 	BaseObj();//コンストラクタ
 	~BaseObj();//デストラクタ
 

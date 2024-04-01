@@ -6,8 +6,8 @@
 const int kWindowSizeX = 1280;
 const int kWindowSizeY = 720;
 
-const int mapxMax = 57;
-const int mapyMax = 30;
+const int mapxMax = 20;
+const int mapyMax = 20;
 
 //ブロックのタイプ
 enum BlockType {
@@ -42,6 +42,8 @@ public:
 	void Init();
 	void Update();
 	void Draw();
+
+	void RenderingPipeline();
 
 	//setter
 	void SetCamelaMatrix(Camera* camelamatrix) { camera_ = camelamatrix; }

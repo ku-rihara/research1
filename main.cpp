@@ -1,5 +1,5 @@
 #include <Novice.h>
-
+#include"InputManager.h"
 //class
 #include"SceneManager.h"
 #include"BaseScene.h"
@@ -27,7 +27,7 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 		// キー入力を受け取る
 		memcpy(preKeys, keys, 256);
 		Novice::GetHitKeyStateAll(keys);
-
+		InputManager::Update();
 		///
 		/// ↓更新処理ここから
 		///

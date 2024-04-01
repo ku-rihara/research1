@@ -18,3 +18,4 @@ float Clamp(float n, float min, float max);
 float Dot(Vector2 obj1,Vector2 obj2);
 
 void  CircleColligion(Vector2 posA, Vector2 posB, float radA, float radB, bool& isColligion);
+
