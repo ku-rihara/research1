@@ -18,7 +18,7 @@ Player::~Player() {
 
 void Player::Init() {
 	BaseObj::Init();
-	worldPos_ = { 48*2,48*2 };
+	worldPos_ = { 48 * 2,48 * 2 };
 	size_ = { 48.0f,48.0f };
 	scale_ = { 1,1 };
 	localVertex_ = MakeLoalVertex(size_);
@@ -31,15 +31,15 @@ void Player::Update() {
 	Move();
 
 	//スクロール範囲の制限
-	const float LeftMost = 200;
-	const float RightMost = (mapchip_->GetMapchipSize()) * mapxMax - (LeftMost);
-	const float TopMost = 200.0f * Camera::zoomLevel_.y;
-	const float BottomMost = (mapchip_->GetMapchipSize()) * mapyMax - (TopMost);
+	const float LeftMost = 248.0f;
+	const float RightMost = (mapchip_->GetMapchipSize()) * (mapxMax-16.5f) - (LeftMost);
+	const float TopMost = 240.0f * Camera::zoomLevel_.y;
+	const float BottomMost = (mapchip_->GetMapchipSize()) * (mapyMax-5) - (TopMost);
 
 	//カメラの動き
 	//X
 	if (worldPos_.x >= LeftMost && worldPos_.x <= RightMost) {
-		Camera::pos_.x=worldPos_.x - LeftMost;
+		Camera::pos_.x = worldPos_.x - LeftMost;
 	}
 	//スクロール範囲外はスクロールしない
 	else {
@@ -48,30 +48,29 @@ void Player::Update() {
 		}
 
 		if (worldPos_.x >= RightMost) {
-			Camera::pos_.x=RightMost - LeftMost;
+			Camera::pos_.x = RightMost - LeftMost;
 		}
 	}
 
 	//Y
 	if (worldPos_.y >= TopMost && worldPos_.y <= BottomMost) {
-
-		Camera::pos_.y=worldPos_.y - TopMost;
+		Camera::pos_.y = worldPos_.y - TopMost;
 	}
 	//スクロール範囲外はスクロールしない
 	else {
 		if (worldPos_.y <= TopMost) {
-			Camera::pos_.y=0;
+			Camera::pos_.y = 0;
 		}
 
 		if (worldPos_.y >= BottomMost) {
-			Camera::pos_.y=BottomMost - TopMost;
+			Camera::pos_.y = BottomMost - TopMost;
 		}
 	}
 }
 
 //描画
 void Player::Draw() {
-	Novice::ScreenPrintf(200,200,"%f",worldPos_.x);
+	Novice::ScreenPrintf(200, 200, "%f", worldPos_.x);
 	Novice::ScreenPrintf(200, 220, "%f", worldPos_.y);
 	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
 }
@@ -85,7 +84,7 @@ void Player::Move() {
 		velocity_.x = -4;
 	}
 	//ジャンプ
-	if (InputManager::GetIsPressKey(DIK_W)&& isFlight_==false) {
+	if (InputManager::GetIsPressKey(DIK_W) && isFlight_ == false) {
 		velocity_.y = -15;
 		isFlight_ = true;
 	}

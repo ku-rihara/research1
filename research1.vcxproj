@@ -108,6 +108,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BaseMiniCamera.cpp" />
     <ClCompile Include="BaseObj.cpp" />
     <ClCompile Include="BaseScene.cpp" />
     <ClCompile Include="BoxRelated.cpp" />
@@ -126,12 +127,14 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="mapchip.cpp" />
     <ClCompile Include="Matrix3x3.cpp" />
+    <ClCompile Include="MiniCamera.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="SceneManager.cpp" />
     <ClCompile Include="ScenePrototype.cpp" />
     <ClCompile Include="Vector2C.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BaseMiniCamera.h" />
     <ClInclude Include="BaseObj.h" />
     <ClInclude Include="BaseScene.h" />
     <ClInclude Include="BoxRelated.h" />
@@ -169,6 +172,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClInclude Include="Map.h" />
     <ClInclude Include="mapchip.h" />
     <ClInclude Include="Matrix3x3.h" />
+    <ClInclude Include="MiniCamera.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="SceneManager.h" />
     <ClInclude Include="ScenePrototype.h" />

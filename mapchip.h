@@ -6,8 +6,8 @@
 const int kWindowSizeX = 1280;
 const int kWindowSizeY = 720;
 
-const int mapxMax = 20;
-const int mapyMax = 20;
+const int mapxMax = 40;
+const int mapyMax = 30;
 
 //ブロックのタイプ
 enum BlockType {

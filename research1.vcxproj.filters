@@ -50,6 +50,15 @@
     <Filter Include="Operator">
       <UniqueIdentifier>{d4eb50c9-c31a-49de-89ce-8d89f92520db}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Camera\.cpp">
+      <UniqueIdentifier>{ed84f958-1002-4c2b-a06f-9a4fb4deed66}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Camera\.h">
+      <UniqueIdentifier>{35d498d6-72ec-44e4-85ca-ee8de32b6fd5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="act">
+      <UniqueIdentifier>{5f3ace9b-a8d7-48f1-a688-41bd2a83c1e6}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="C:\KamataEngine\DirectXGame\base\DirectXCommon.cpp">
@@ -76,9 +85,6 @@
     </ClCompile>
     <ClCompile Include="Vector2C.cpp">
       <Filter>Operator</Filter>
-    </ClCompile>
-    <ClCompile Include="Camera.cpp">
-      <Filter>Camera</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>KamataEngine</Filter>
@@ -115,6 +121,15 @@
     </ClCompile>
     <ClCompile Include="mapchip.cpp">
       <Filter>MapChip</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseMiniCamera.cpp">
+      <Filter>Camera\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Camera\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="MiniCamera.cpp">
+      <Filter>Camera\.cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -181,22 +196,12 @@
     <ClInclude Include="C:\KamataEngine\DirectXGame\3d\SpotLight.h">
       <Filter>KamataEngine\Include</Filter>
     </ClInclude>
-    <ClInclude Include="C:\KamataEngine\DirectXGame\math\Matrix4x4.h" />
-    <ClInclude Include="..\..\..\..\..\KamataEngine\DirectXGame\math\Vector2.h" />
-    <ClInclude Include="C:\KamataEngine\DirectXGame\math\Vector3.h" />
-    <ClInclude Include="C:\KamataEngine\DirectXGame\math\Vector4.h" />
-    <ClInclude Include="C:\KamataEngine\DirectXGame\2d\ImGuiManager.h" />
     <ClInclude Include="C:\KamataEngine\DirectXGame\base\StringUtility.h">
       <Filter>KamataEngine\Include</Filter>
     </ClInclude>
     <ClInclude Include="Vector2C.h">
       <Filter>Operator</Filter>
     </ClInclude>
-    <ClInclude Include="struct.h" />
-    <ClInclude Include="Camera.h">
-      <Filter>Camera</Filter>
-    </ClInclude>
-    <ClInclude Include="InputManager.h" />
     <ClInclude Include="BoxRelated.h">
       <Filter>Function\.h</Filter>
     </ClInclude>
@@ -230,5 +235,33 @@
     <ClInclude Include="mapchip.h">
       <Filter>MapChip</Filter>
     </ClInclude>
+    <ClInclude Include="BaseMiniCamera.h">
+      <Filter>Camera\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Camera\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="MiniCamera.h">
+      <Filter>Camera\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\KamataEngine\DirectXGame\2d\ImGuiManager.h">
+      <Filter>act</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>act</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\KamataEngine\DirectXGame\math\Matrix4x4.h">
+      <Filter>act</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\..\..\..\KamataEngine\DirectXGame\math\Vector2.h">
+      <Filter>act</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\KamataEngine\DirectXGame\math\Vector3.h">
+      <Filter>act</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\KamataEngine\DirectXGame\math\Vector4.h">
+      <Filter>act</Filter>
+    </ClInclude>
+    <ClInclude Include="struct.h" />
   </ItemGroup>
 </Project>

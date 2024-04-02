@@ -9,7 +9,6 @@
 //class
 
 
-
 Mapchip::Mapchip() {
 	Init();
 	fileLoad();
