@@ -43,11 +43,11 @@ void Player::Update() {
 	}
 	//スクロール範囲外はスクロールしない
 	else {
-		if (worldPos_.x <= LeftMost) {
+		if (worldPos_.x <= LeftMost||Camera::zoomLevel_.x>= Camera::zoomOutMax_) {
 			Camera::worldPos_.x = 0;
 		}
 
-		if (worldPos_.x >= RightMost) {
+		if (worldPos_.x >= RightMost&& Camera::zoomLevel_.x < Camera::zoomOutMax_) {
 			Camera::worldPos_.x = RightMost - LeftMost;
 		}
 	}

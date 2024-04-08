@@ -13,11 +13,10 @@ void ScenePrototype::Init() {
 }
 
 void ScenePrototype::Update() {
-	
+	camera_->Update();
 	player_->Update();//プレイヤーの更新
 	mapchip_->Update();
-	camera_->Update();
-
+	
 	//当たり判定
 	player_->MapChipColligion();
 	backGround_->Update();

@@ -9,6 +9,7 @@ public:
 	static Vector2 worldPos_;
 	Vector2 backPos_;
 	static Vector2 zoomLevel_;
+	static const float zoomOutMax_;
 
 	Matrix3x3 worldMatrix_;
 	Matrix3x3 viewMatrix_;

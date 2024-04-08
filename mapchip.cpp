@@ -101,7 +101,6 @@ void Mapchip::RenderingPipeline() {
 }
 
 void Mapchip::Draw() {
-
 	//スクロール座標の取得
 	scrollPos_ = Camera::worldPos_;
 

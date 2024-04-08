@@ -9,26 +9,27 @@
 
 Vector2 Camera::worldPos_;
 Vector2 Camera::zoomLevel_;
+const float Camera::zoomOutMax_ = 1.5f;
 
 Camera::Camera() {
 	Init();
 }
 
- Camera::~Camera() {
+Camera::~Camera() {
 
 }
 
- void Camera::Init() {
-	 worldPos_ = {};
-	 zoomLevel_ = { 1,1 };
-	 worldMatrix_ = {};
-	 viewMatrix_ = {};
-	 orthoMatrix_ = {};
-	 viewportMatrix_ = {};
+void Camera::Init() {
+	worldPos_ = {};
+	zoomLevel_ = { 1,1 };
+	worldMatrix_ = {};
+	viewMatrix_ = {};
+	orthoMatrix_ = {};
+	viewportMatrix_ = {};
 
- }
+}
 void Camera::MakeCamelaMatrix() {
-	
+
 	worldMatrix_ = MakeAffineMatrix(zoomLevel_, 0, worldPos_);
 	viewMatrix_ = InverseMatrix(worldMatrix_);
 	orthoMatrix_ = MakeOrthographicMatrix(0, 0, 1280, 720);
@@ -40,7 +41,7 @@ void Camera::MakeBackCamelaMatrix() {
 		worldMatrix_ = MakeAffineMatrix(zoomLevel_, 0, backPos_);
 	}
 	else {
-		worldMatrix_ = MakeAffineMatrix(Vector2(1.0f,1.0f), 0, backPos_);
+		worldMatrix_ = MakeAffineMatrix(Vector2(1.0f, 1.0f), 0, backPos_);
 	}
 	viewMatrix_ = InverseMatrix(worldMatrix_);
 	orthoMatrix_ = MakeOrthographicMatrix(-640, -360, 640, 360);
@@ -52,8 +53,14 @@ void Camera::Update() {
 		Camera::zoomLevel_ -= 0.01f;
 	}
 
-	else	if (InputManager::GetIsPressKey(DIK_DOWN)) {
-		Camera::zoomLevel_ += 0.01f;
+	else if (InputManager::GetIsPressKey(DIK_DOWN)) {
+		if (Camera::zoomLevel_.x < Camera::zoomOutMax_) {
+			Camera::zoomLevel_ += 0.01f;
+		}
+		else {
+			Camera::zoomLevel_.x = Camera::zoomOutMax_;
+			Camera::zoomLevel_.y = Camera::zoomOutMax_;
+		}
 	}
 }
 
