@@ -7,7 +7,7 @@
 #include "BoxRelated.h"
 
 //class
-
+#include"Camera.h"
 
 Mapchip::Mapchip() {
 	Init();
@@ -23,7 +23,7 @@ void Mapchip::Init() {
 	localVertex_ = MakeLoalVertex(size_);	
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {
-			pos_[y][x] = {};
+			worldPos_[y][x] = {};
 			matrix_[y][x] = {};
 		}
 	}
@@ -79,8 +79,8 @@ void Mapchip::Update() {
 	//マップチップの座標取得
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {
-			pos_[y][x].x = float(x * size_) + (size_ / 2);
-			pos_[y][x].y = float(y * size_) + (size_ / 2);
+			worldPos_[y][x].x = float(x * size_) + (size_ / 2);
+			worldPos_[y][x].y = float(y * size_) + (size_ / 2);
 
 			
 		}
@@ -92,7 +92,7 @@ void Mapchip::RenderingPipeline() {
 		for (int x = 0; x < mapxMax; x++) {
 			//マップチップ行列の作成
 			camera_->MakeCamelaMatrix();
-			matrix_[y][x] = MakeAffineMatrix(scale_, 0, pos_[y][x]);
+			matrix_[y][x] = MakeAffineMatrix(scale_, 0, worldPos_[y][x]);
 			wvMatrix_[y][x] = Multiply(matrix_[y][x], camera_->GetViewMatrix());
 			//スクリーンに変換＆描画
 			ScreenVertex_[y][x] = Transform(localVertex_, wvMatrix_[y][x]);
@@ -103,12 +103,12 @@ void Mapchip::RenderingPipeline() {
 void Mapchip::Draw() {
 
 	//スクロール座標の取得
-	scrollPos_ = Camera::pos_;
+	scrollPos_ = Camera::worldPos_;
 
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {	
 			//画面内のみ描画する
-			if (pos_[y][x].x - scrollPos_.x >= -size_ * Camera::zoomLevel_.x && pos_[y][x].x - scrollPos_.x <= (kWindowSizeX + size_) * Camera::zoomLevel_.x && pos_[y][x].y - scrollPos_.y >= -size_ * Camera::zoomLevel_.y && pos_[y][x].y - scrollPos_.y <= (kWindowSizeY + size_) * Camera::zoomLevel_.y) {
+			if (worldPos_[y][x].x - scrollPos_.x >= -size_ * Camera::zoomLevel_.x && worldPos_[y][x].x - scrollPos_.x <= (kWindowSizeX + size_) * Camera::zoomLevel_.x && worldPos_[y][x].y - scrollPos_.y >= -size_ * Camera::zoomLevel_.y && worldPos_[y][x].y - scrollPos_.y <= (kWindowSizeY + size_) * Camera::zoomLevel_.y) {
 				if (map[y][x] == BLOCK) {
 					newDrawQuad(ScreenVertex_[y][x], 0, 0, size_, size_, mapTexture.Handle, WHITE);
 				}

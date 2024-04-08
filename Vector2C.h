@@ -20,12 +20,12 @@ public:
 
     Vector2 operator/(const Vector2& obj);
 
-    void operator+=(const Vector2& obj);
+    void operator+=(const float& obj);
 
-    void operator-=(const Vector2& obj);
+    void operator-=(const float& obj);
 
-    void operator*=(const Vector2& obj);
+    void operator*=(const float& obj);
 
-    void operator/=(const Vector2& obj);
+    void operator/=(const float& obj);
 };
 

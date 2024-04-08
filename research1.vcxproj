@@ -108,6 +108,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="BaseMiniCamera.cpp" />
     <ClCompile Include="BaseObj.cpp" />
     <ClCompile Include="BaseScene.cpp" />
@@ -134,6 +135,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
     <ClCompile Include="Vector2C.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="BaseMiniCamera.h" />
     <ClInclude Include="BaseObj.h" />
     <ClInclude Include="BaseScene.h" />

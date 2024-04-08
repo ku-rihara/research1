@@ -131,6 +131,9 @@
     <ClCompile Include="MiniCamera.cpp">
       <Filter>Camera\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>Object\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -263,5 +266,8 @@
       <Filter>act</Filter>
     </ClInclude>
     <ClInclude Include="struct.h" />
+    <ClInclude Include="BackGround.h">
+      <Filter>Object\.h</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -12,7 +12,7 @@ BaseMiniCamera::~BaseMiniCamera() {
 }
 
 void BaseMiniCamera::Init() {
-	pos_ = {};
+	worldPos_ = {};
 	zoomLevel_ = { 1,1 };
 	worldMatrix_ = {};
 	viewMatrix_ = {};
@@ -22,7 +22,7 @@ void BaseMiniCamera::Init() {
 }
 void BaseMiniCamera::MakeCamelaMatrix() {
 
-	worldMatrix_ = MakeAffineMatrix(zoomLevel_, 0, pos_);
+	worldMatrix_ = MakeAffineMatrix(zoomLevel_, 0, worldPos_);
 	viewMatrix_ = InverseMatrix(worldMatrix_);
 	orthoMatrix_ = MakeOrthographicMatrix(0, 0, 1280, 720);
 	viewportMatrix_ = MakeViewwportmatrix(0, 0, 1280, 720);

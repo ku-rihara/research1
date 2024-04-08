@@ -14,8 +14,8 @@
 BaseObj::BaseObj() {
 
 	Init();
-	camera_ = new Camera;
-	mapchip_ = new  Mapchip;
+	camera_ = new Camera();
+	mapchip_ = new  Mapchip();
 };
 
 BaseObj::~BaseObj() {

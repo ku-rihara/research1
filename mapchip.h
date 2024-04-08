@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include"struct.h"
-#include"Camera.h"
+
 
 //ウィンドウサイズ
 const int kWindowSizeX = 1280;
@@ -16,13 +16,14 @@ enum BlockType {
 	START,//2
 };
 
+class Camera;
 //マップチップクラス
 class Mapchip {
 private:
 	Camera* camera_;
 	//pos
 	Vector2 scrollPos_;
-	Vector2 pos_[mapyMax][mapxMax];
+	Vector2 worldPos_[mapyMax][mapxMax];
 	Vector2 scale_;
 	//Matrix&Vertex
 	Matrix3x3 matrix_[mapyMax][mapxMax];
@@ -51,7 +52,7 @@ public:
 
 	//getter
 	Vector2 GetScrollPos() const { return scrollPos_; }
-	Vector2 GetPos(int x, int y)const { return pos_[y][x]; }
+	Vector2 GetPos(int x, int y)const { return worldPos_[y][x]; }
 	float GetMapchipSize()const { return size_; }
 };
 

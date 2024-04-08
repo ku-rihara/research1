@@ -6,7 +6,8 @@ class Camera {
 public:
 
 	//Pos,ZoomLevel
-	static Vector2 pos_;
+	static Vector2 worldPos_;
+	Vector2 backPos_;
 	static Vector2 zoomLevel_;
 
 	Matrix3x3 worldMatrix_;
@@ -20,7 +21,9 @@ public:
 	Camera();
 	~Camera();
 	void Init();
+	void Update();
 	void MakeCamelaMatrix();
+	void MakeBackCamelaMatrix();
 	/*void ZoomOut();
 	void ZoomIn();*/
 
@@ -29,15 +32,15 @@ public:
 	Matrix3x3 GetViewMatrix()const { return viewMatrix_; }
 	Matrix3x3 GetOrthoMatrix()const { return orthoMatrix_; }
 	Matrix3x3 GetViewportMatrix()const { return viewportMatrix_; }
-	Vector2 GetPos()const { return pos_; }
+	Vector2 GetWorldPos()const { return worldPos_; }
 	Vector2 GetZoomLevel()const { return zoomLevel_; }
 
 
 	//setter
-	void SetPosX(float posX) { this->pos_.x = posX; }
-	void SetPosY(float posY) { this->pos_.y = posY; }
-	void SetIncPosX(float posX) { this->pos_.x += posX; }
-	void SetIncPosY(float posY) { this->pos_.y += posY; }
+	void SetPosX(float posX) { this->worldPos_.x = posX; }
+	void SetPosY(float posY) { this->worldPos_.y = posY; }
+	void SetIncPosX(float posX) { this->worldPos_.x += posX; }
+	void SetIncPosY(float posY) { this->worldPos_.y += posY; }
 	void SetZoomLevelX(float Zoom) { this->zoomLevel_.x = Zoom; }
 	void SetZoomLevelY(float Zoom) { this->zoomLevel_.y = Zoom; }
 

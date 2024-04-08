@@ -3,10 +3,12 @@
 
 //前方宣言
 class Mapchip;
+class Camera;
 
 class Player:public BaseObj{
 private:
 	Mapchip* mapchip_;
+	Camera* camera_;
 	DIRECTION direction_;
 	GH texture_;
 public:

@@ -69,24 +69,24 @@ Vector2 Vector2:: operator/(const Vector2& obj) {
 	return result;
 
 }
-void  Vector2::operator+=(const Vector2& obj) {
-     x +=obj.x;
-	 y +=obj.y;
+void  Vector2::operator+=(const float& obj) {
+     x +=obj;
+	 y +=obj;
 }
 
-void Vector2:: operator-=(const Vector2& obj) {
-	x -= obj.x;
-	y -= obj.y;
+void Vector2:: operator-=(const float& obj) {
+	x -= obj;
+	y -= obj;
 }
 
-void  Vector2::operator*=(const Vector2& obj) {
-	x *= obj.x;
-	y *= obj.y;
+void  Vector2::operator*=(const float& obj) {
+	x *= obj;
+	y *= obj;
 }
 
-void  Vector2::operator/=(const Vector2& obj) {
-	if (obj.x != 0&& obj.y!=0) {
-		x /= obj.x;
-		y /= obj.y;
+void  Vector2::operator/=(const float& obj) {
+	if (obj != 0) {
+		x /= obj;
+		y /= obj;
 	}
 }
