@@ -109,6 +109,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="BaseMapchip.cpp" />
     <ClCompile Include="BaseMiniCamera.cpp" />
     <ClCompile Include="BaseObj.cpp" />
     <ClCompile Include="BaseScene.cpp" />
@@ -136,6 +137,7 @@ xcopy C:\KamataEngine\DirectXGame\Resources "$(OutDirFullPath)NoviceResources" /
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="BaseMapchip.h" />
     <ClInclude Include="BaseMiniCamera.h" />
     <ClInclude Include="BaseObj.h" />
     <ClInclude Include="BaseScene.h" />

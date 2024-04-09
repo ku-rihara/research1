@@ -134,6 +134,9 @@
     <ClCompile Include="BackGround.cpp">
       <Filter>Object\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="BaseMapchip.cpp">
+      <Filter>MapChip</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -268,6 +271,9 @@
     <ClInclude Include="struct.h" />
     <ClInclude Include="BackGround.h">
       <Filter>Object\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseMapchip.h">
+      <Filter>MapChip</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

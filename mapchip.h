@@ -1,6 +1,6 @@
 ﻿#pragma once
 #include"struct.h"
-
+#include"BaseObj.h"
 
 //ウィンドウサイズ
 const int kWindowSizeX = 1280;
@@ -18,22 +18,25 @@ enum BlockType {
 
 class Camera;
 //マップチップクラス
-class Mapchip {
+class Mapchip:public BaseObj {
 private:
 	Camera* camera_;
+	BaseObj* baseobj_[mapyMax][mapxMax];
+	
 	//pos
 	Vector2 scrollPos_;
-	Vector2 worldPos_[mapyMax][mapxMax];
-	Vector2 scale_;
-	//Matrix&Vertex
-	Matrix3x3 matrix_[mapyMax][mapxMax];
-	Matrix3x3 wvMatrix_[mapyMax][mapxMax];
-	Vertex ScreenVertex_[mapyMax][mapxMax];
-	Vertex localVertex_;
+	//Vector2 worldPos_[mapyMax][mapxMax];
+	//Vector2 scale_;
+	////Matrix&Vertex
+	///*Matrix3x3 matrix_[mapyMax][mapxMax];
+	//Matrix3x3 wvMatrix_[mapyMax][mapxMax];
+	//Vertex ScreenVertex_[mapyMax][mapxMax];*/
+	//Vertex localVertex_;
 	//size,texture
 	float size_;
-	GH mapTexture;
 
+	GH mapTexture;
+	
 public:
 	BlockType map[mapyMax][mapxMax];
 
@@ -44,7 +47,7 @@ public:
 	void Update();
 	void Draw();
 
-	void RenderingPipeline();
+	void RenderingPipeline()override;
 
 	//setter
 	void SetCamelaMatrix(Camera* camelamatrix) { camera_ = camelamatrix; }
@@ -52,7 +55,6 @@ public:
 
 	//getter
 	Vector2 GetScrollPos() const { return scrollPos_; }
-	Vector2 GetPos(int x, int y)const { return worldPos_[y][x]; }
 	float GetMapchipSize()const { return size_; }
 };
 

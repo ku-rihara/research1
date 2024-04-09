@@ -45,6 +45,7 @@ public:
 	virtual void MapChipColligion();
 	
 	Vector2 GetWorldPos()const { return worldPos_; }
+	Vertex GetScreenVertex()const { return screenVertex_; }
 	Vector2 GetRadius()const { return radius_; }
 
 	void SetWorldPosX(float pos) { this->worldPos_.x = pos; }
