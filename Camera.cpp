@@ -2,14 +2,12 @@
 #include"InputManager.h"
 //function
 #include"Matrix3x3.h"
-
-
 //class
 #include"Camera.h"
 
 Vector2 Camera::worldPos_;
 Vector2 Camera::zoomLevel_;
-const float Camera::zoomOutMax_ = 1.5f;
+const float Camera::zoomOutMax_ = 1.49f;
 
 Camera::Camera() {
 	Init();

@@ -5,10 +5,12 @@
 //前方宣言
 class Camera;
 class Mapchip;
+//class BaseMiniCamera;
 
 class BaseObj{
 protected:
-	//包含
+	////包含
+	//BaseMiniCamera* baseMinicamera_;
 	Camera* camera_;
 	Mapchip* mapchip_;
 
