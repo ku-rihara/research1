@@ -6,20 +6,17 @@
 //class
 #include"Camera.h"
 
-BaseMiniCamera::BaseMiniCamera(Vector2 worldPos, Vector2 monitorPos, Vector2 size) {
-	camera_ = new Camera;
-	Init( worldPos,monitorPos,size);
+BaseMiniCamera::BaseMiniCamera( Vector2 monitorPos) {
+	camera_ = new Camera();
+	monitorPos_ = monitorPos;
 }
 
 BaseMiniCamera::~BaseMiniCamera() {
 
 }
 
-void BaseMiniCamera::Init(Vector2 worldPos, Vector2 monitorPos, Vector2 size) {
+void BaseMiniCamera::Init() {
 	scale_ = { 1,1 };
-	worldPos_ = worldPos;
-	monitorPos_ = monitorPos;
-	size_ = size;
 	localVertex_ = MakeLoalVertex(size_);
 	worldMatrix_ = {};
 	viewMatrix_ = {};

@@ -1,18 +1,22 @@
 #pragma once
 #include"BaseMiniCamera.h"
 
-//ミニカメラの数
-const int miniCameraNum=1;
-const int objNum = 3;
+const int miniCameraNum=1;//ミニカメラの数
+const int objNum = 3;//オブジェクト数
+
+//前方宣言
+class Player;
+class Mapchip;
+class BackGround;
 
 class MiniCamera:public BaseMiniCamera{
 public:
 	BaseMiniCamera* miniCamera_[miniCameraNum][objNum];
 public:
 
-	MiniCamera(Vector2 worldPos, Vector2 monitorPos, Vector2 size);
+	MiniCamera(Vector2 monitorPos);
 	~MiniCamera();
-	void Init(Vector2 worldPos, Vector2 monitorPos, Vector2 size)override;
+	void Init()override;
 	void MakeCamelaMatrix()override;
 
 

@@ -30,9 +30,9 @@ class BaseMiniCamera {
 	Matrix3x3 screenVertex_;
 public:
 
-	BaseMiniCamera(Vector2 worldPos, Vector2 monitorPos, Vector2 size);
+	BaseMiniCamera(Vector2 monitorPos);
 	~BaseMiniCamera();
-	virtual void Init(Vector2 worldPos, Vector2 monitorPos, Vector2 size);
+	virtual void Init();
 	virtual void MakeCamelaMatrix();
 	void RenderingPipeline();
 

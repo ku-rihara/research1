@@ -1,10 +1,17 @@
 #include "MiniCamera.h"
 
-MiniCamera::MiniCamera(Vector2 worldPos, Vector2 monitorPos, Vector2 size) {
+//class
+#include"Player.h"
+#include"mapchip.h"
+#include"BackGround.h"
+
+MiniCamera::MiniCamera(Vector2 monitorPos):BaseMiniCamera(monitorPos) {
 	for (int i = 0; i < miniCameraNum; i++) {
-		miniCamera_[i][0] = new BaseMiniCamera();
-	
-	Init(Vector2 worldPos, Vector2 monitorPos, Vector2 size);
+		for (int j = 0; j < objNum; j++) {
+			miniCamera_[i][j] = new BaseMiniCamera(monitorPos);
+		}
+	}
+	Init();
 }
 MiniCamera::~MiniCamera() {
 
@@ -12,10 +19,11 @@ MiniCamera::~MiniCamera() {
 
 void MiniCamera::Init() {
 	for (int i = 0; i < miniCameraNum; i++) {
-		for (int j = 0; j < objNum; j++) {
-			miniCamera_[i][j]->BaseMiniCamera::Init();
-		}
+		miniCamera_[i][0]->;
+		miniCamera_[i][1]->;
+		miniCamera_[i][2]->;	
 	}
+	BaseMiniCamera::Init();
 }
 
 void MiniCamera::MakeCamelaMatrix() {
