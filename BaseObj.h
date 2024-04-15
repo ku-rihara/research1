@@ -49,6 +49,7 @@ public:
 	Vertex GetScreenVertex()const { return screenVertex_; }
 	Vector2 GetRadius()const { return radius_; }
 
+	void SetWorldPos(Vector2 pos) { this->worldPos_ = pos; }
 	void SetWorldPosX(float pos) { this->worldPos_.x = pos; }
 	void SetWorldPosY(float pos) { this->worldPos_.y = pos; }
 };

@@ -6,6 +6,9 @@
 #include"BackGround.h"
 
 MiniCamera::MiniCamera(Vector2 monitorPos):BaseMiniCamera(monitorPos) {
+	player_ = new Player();
+	mapchip_ = new Mapchip();
+	backGround_ = new BackGround();
 	for (int i = 0; i < miniCameraNum; i++) {
 		for (int j = 0; j < objNum; j++) {
 			miniCamera_[i][j] = new BaseMiniCamera(monitorPos);
@@ -19,10 +22,14 @@ MiniCamera::~MiniCamera() {
 
 void MiniCamera::Init() {
 	for (int i = 0; i < miniCameraNum; i++) {
-		miniCamera_[i][0]->;
-		miniCamera_[i][1]->;
-		miniCamera_[i][2]->;	
+	/*	miniCamera_[i][0]->SetWorldPos(player_->GetWorldPos());
+		miniCamera_[i][1]->SetWorldPos(mapchip_->GetPos());
+		miniCamera_[i][2]->SetWorldPos(player_->GetWorldPos());
+		miniCamera_[i][0]->SetWorldPos(player_->GetWorldPos());
+		miniCamera_[i][1]->SetWorldPos(player_->GetWorldPos());
+		miniCamera_[i][2]->SetWorldPos(player_->GetWorldPos());*/
 	}
+
 	BaseMiniCamera::Init();
 }
 

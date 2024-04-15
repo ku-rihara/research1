@@ -13,9 +13,9 @@ void ScenePrototype::Init() {
 }
 
 void ScenePrototype::Update() {
-	camera_->Update();
+	camera_->Update();//カメラの更新
 	player_->Update();//プレイヤーの更新
-	mapchip_->Update();
+	mapchip_->Update();//マップチップの更新
 	
 	//当たり判定
 	player_->MapChipColligion();
@@ -29,7 +29,7 @@ void ScenePrototype::Update() {
 void ScenePrototype::Draw() {
 	Novice::ScreenPrintf(200, 200, "%f", player_->GetWorldPos().x);
 	Novice::ScreenPrintf(200, 220, "%f", player_->GetWorldPos().y);
-	Novice::ScreenPrintf(200, 270, "%f",  camera_->GetWorldPos().x);
+	Novice::ScreenPrintf(200, 270, "%f", camera_->GetWorldPos().x);
 	Novice::ScreenPrintf(200, 280, "%f", camera_->GetWorldPos().y);
 	backGround_->Draw();
 	mapchip_->Draw();

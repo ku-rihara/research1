@@ -11,6 +11,9 @@ class BackGround;
 
 class MiniCamera:public BaseMiniCamera{
 public:
+	Player* player_;
+	Mapchip* mapchip_;
+	BackGround* backGround_;
 	BaseMiniCamera* miniCamera_[miniCameraNum][objNum];
 public:
 

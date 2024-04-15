@@ -47,10 +47,11 @@ void Camera::MakeBackCamelaMatrix() {
 }
 
 void Camera::Update() {
+	//ズームイン
 	if (InputManager::GetIsPressKey(DIK_UP)) {
 		Camera::zoomLevel_ -= 0.01f;
 	}
-
+	//ズームアウト
 	else if (InputManager::GetIsPressKey(DIK_DOWN)) {
 		if (Camera::zoomLevel_.x < Camera::zoomOutMax_) {
 			Camera::zoomLevel_ += 0.01f;

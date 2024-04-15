@@ -6,6 +6,7 @@
 class Camera;
 
 class BaseMiniCamera {
+protected:
 	//包含
 	Camera* camera_;
 
@@ -45,6 +46,7 @@ public:
 	/*Vector2 GetZoomLevel()const { return zoomLevel_; }*/
 
 	//setter
+	void SetWorldPos(Vector2 pos) { this->worldPos_ = pos; }
 	void SetPosX(float posX) { this->worldPos_.x = posX; }
 	void SetPosY(float posY) { this->worldPos_.y = posY; }
 	void SetIncPosX(float posX) { this->worldPos_.x += posX; }
