@@ -5,7 +5,6 @@ class Camera;
 
 class BackGround:public BaseObj{
 private:
-	Camera* camera_;
 	//画像ハンドル
 	GH texture_;
 public:

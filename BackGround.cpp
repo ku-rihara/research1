@@ -1,11 +1,10 @@
 #include "BackGround.h"
 #include"BoxRelated.h"
 #include"Matrix3x3.h"
-//class
-#include"Camera.h"
+
+
 BackGround::BackGround() {
-	camera_ = new Camera();
-	Init();
+
 	texture_.Handle = Novice::LoadTexture("./Resources/SkyBackgraund.png");
 }
 BackGround::~BackGround() {
@@ -18,8 +17,7 @@ void BackGround::Init() {
 	size_= { 1280,720 };
 	localVertex_ = MakeLoalVertex(size_);
 	worldPos_ = { 640,360 };
-	camera_->backPos_.x = 640;
-	camera_->backPos_.y = 360;
+	camera_->SetBackPos(Vector2(640,360));
 }
 
 void BackGround::Update() {

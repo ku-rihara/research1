@@ -5,14 +5,13 @@
 //function
 #include"Matrix3x3.h"
 #include "BoxRelated.h"
-
 //class
 #include"Camera.h"
+#include"MiniCamera.h"
 
 Mapchip::Mapchip() {
-	Init();
+	
 	fileLoad();
-	camera_ = new Camera();
 	mapTexture.Handle = Novice::LoadTexture("white1x1.png");//マップ画像
 }
 
@@ -100,12 +99,12 @@ void Mapchip::RenderingPipeline() {
 
 void Mapchip::Draw() {
 	//スクロール座標の取得
-	scrollPos_ = Camera::worldPos_;
+	scrollPos_ = camera_->GetWorldPos();
 
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {	
 			//画面内のみ描画する
-			if (worldPos_[y][x].x - scrollPos_.x >= -size_ * Camera::zoomLevel_.x && worldPos_[y][x].x - scrollPos_.x <= (kWindowSizeX + size_) * Camera::zoomLevel_.x && worldPos_[y][x].y - scrollPos_.y >= -size_ * Camera::zoomLevel_.y && worldPos_[y][x].y - scrollPos_.y <= (kWindowSizeY + size_) * Camera::zoomLevel_.y) {
+			if (worldPos_[y][x].x - scrollPos_.x >= -size_ * camera_->GetZoomLevel().x && worldPos_[y][x].x - scrollPos_.x <= (kWindowSizeX + size_) * camera_->GetZoomLevel().x && worldPos_[y][x].y - scrollPos_.y >= -size_ * camera_->GetZoomLevel().y && worldPos_[y][x].y - scrollPos_.y <= (kWindowSizeY + size_) * camera_->GetZoomLevel().y) {
 				if (map[y][x] == BLOCK) {
 					newDrawQuad(ScreenVertex_[y][x], 0, 0, size_, size_, mapTexture.Handle, WHITE);
 				}

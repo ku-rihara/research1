@@ -60,3 +60,5 @@ enum DIRECTION {
 	LEFT,
 	RIGHT,
 };
+
+const float zoomOutMax = 1.49f;

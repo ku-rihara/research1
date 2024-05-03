@@ -4,18 +4,11 @@
 //Function
 #include"Matrix3x3.h"
 #include"Map.h"
-
 //class
 #include "BaseObj.h"
-#include"Camera.h"
-#include"mapchip.h"
-
 
 BaseObj::BaseObj() {
-
 	Init();
-	camera_ = new Camera();
-	mapchip_ = new  Mapchip();
 };
 
 BaseObj::~BaseObj() {
@@ -39,6 +32,14 @@ void BaseObj::RenderingPipeline() {
 	wvpVpMatrix_ = wvpVpMatrix(matrix_, camera_->GetViewMatrix(), camera_->GetOrthoMatrix(), camera_->GetViewportMatrix());
 	screenVertex_ = Transform(localVertex_, wvpVpMatrix_);
 }
+//ミニカメラのレンダリングパイプライン
+void BaseObj::MiniRenderingPipeline() {
+	miniCamera_->MakeCamelaMatrix();
+	MiniMatrix_ = MakeAffineMatrix(scale_, theta_, worldPos_);
+	MiniwvpVpMatrix_ = wvpVpMatrix(MiniMatrix_, miniCamera_->GetViewMatrix(), miniCamera_->GetOrthoMatrix(), miniCamera_->GetViewportMatrix());
+	MiniScreenVertex_ = Transform(localVertex_, MiniwvpVpMatrix_);
+}
+
 
 void BaseObj::MapChipColligion() {
 	/*maxPos_.x = MAX(worldPos_.x, oldWorldPos_.x);

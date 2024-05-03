@@ -1,28 +1,21 @@
-#pragma once
-#include"BaseMiniCamera.h"
+ï»¿#pragma once
+#include"struct.h"
+#include"Vector2C.h"
+#include"BaseCamera.h"
+//å‰æ–¹å®£è¨€
+class Camera;
 
-const int miniCameraNum=1;//ƒ~ƒjƒJƒƒ‰‚Ì”
-const int objNum = 3;//ƒIƒuƒWƒFƒNƒg”
-
-//‘O•ûéŒ¾
-class Player;
-class Mapchip;
-class BackGround;
-
-class MiniCamera:public BaseMiniCamera{
-public:
-	Player* player_;
-	Mapchip* mapchip_;
-	BackGround* backGround_;
-	BaseMiniCamera* miniCamera_[miniCameraNum][objNum];
+class MiniCamera:public BaseCamera {
+private:
+	
 public:
 
-	MiniCamera(Vector2 monitorPos);
+	MiniCamera();
 	~MiniCamera();
-	void Init()override;
-	void MakeCamelaMatrix()override;
-
-
+	 void Init()override;
+	 void MakeCamelaMatrix()override;
 
 };
+
+
 

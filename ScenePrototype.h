@@ -5,6 +5,7 @@
 #include"Player.h"
 #include"mapchip.h"
 #include"Camera.h"
+#include "MiniCamera.h"
 #include"BackGround.h"
 
 class ScenePrototype:public BaseScene{
@@ -12,6 +13,7 @@ private:
 	Player* player_;
 	Mapchip* mapchip_;
 	Camera* camera_;
+	MiniCamera* miniCamera_;
 	BackGround* backGround_;
 public:
 	ScenePrototype();//コンストラクタ

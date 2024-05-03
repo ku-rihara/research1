@@ -1,42 +1,45 @@
+#include<Novice.h>
 #include "MiniCamera.h"
+//function
+#include"Matrix3x3.h"
+#include"BoxRelated.h"
+#include"Camera.h"
 
-//class
-#include"Player.h"
-#include"mapchip.h"
-#include"BackGround.h"
+MiniCamera::MiniCamera() {
 
-MiniCamera::MiniCamera(Vector2 monitorPos):BaseMiniCamera(monitorPos) {
-	player_ = new Player();
-	mapchip_ = new Mapchip();
-	backGround_ = new BackGround();
-	for (int i = 0; i < miniCameraNum; i++) {
-		for (int j = 0; j < objNum; j++) {
-			miniCamera_[i][j] = new BaseMiniCamera(monitorPos);
-		}
-	}
-	Init();
 }
+
 MiniCamera::~MiniCamera() {
 
 }
 
 void MiniCamera::Init() {
-	for (int i = 0; i < miniCameraNum; i++) {
-	/*	miniCamera_[i][0]->SetWorldPos(player_->GetWorldPos());
-		miniCamera_[i][1]->SetWorldPos(mapchip_->GetPos());
-		miniCamera_[i][2]->SetWorldPos(player_->GetWorldPos());
-		miniCamera_[i][0]->SetWorldPos(player_->GetWorldPos());
-		miniCamera_[i][1]->SetWorldPos(player_->GetWorldPos());
-		miniCamera_[i][2]->SetWorldPos(player_->GetWorldPos());*/
-	}
-
-	BaseMiniCamera::Init();
+	BaseCamera::Init();
+	viewprot_ = { 0,0,640,320 };
 }
-
 void MiniCamera::MakeCamelaMatrix() {
-	for (int i = 0; i < miniCameraNum; i++) {
-		for (int j = 0; j < objNum; j++) {
-			miniCamera_[i][j]->BaseMiniCamera::MakeCamelaMatrix();
-		}
-	}
+	BaseCamera::MakeCamelaMatrix();
+
+	/*worldMatrix_ = MakeAffineMatrix(Camera::zoomLevel_, 0, Camera::worldPos_);
+	viewMatrix_ = InverseMatrix(worldMatrix_);
+	orthoMatrix_ = MakeOrthographicMatrix(0, 0, 1280, 720);
+	viewportMatrix_ = MakeViewwportmatrix(monitorPos_.x, monitorPos_.y, 1280.0f/2, 720.0f/2);*/
 }
+
+//void MiniCamera::MakeBackCamelaMatrix() {
+//	if (zoomLevel_.x <= 1.0f && zoomLevel_.y <= 1.0f) {
+//		worldMatrix_ = MakeAffineMatrix(zoomLevel_, 0, backPos_);
+//	}
+//	else {
+//		worldMatrix_ = MakeAffineMatrix(Vector2(1.0f, 1.0f), 0, backPos_);
+//	}
+//	viewMatrix_ = InverseMatrix(worldMatrix_);
+//	orthoMatrix_ = MakeOrthographicMatrix(-640, -360, 640, 360);
+//	viewportMatrix_ = MakeViewwportmatrix(0, 0, 1280, 720);
+//}
+
+//void MiniCamera::RenderingPipeline() {
+//	matrix_ = MakeAffineMatrix(scale_, theta_, worldPos_);
+//	wvpVpMatrix_ = wvpVpMatrix(matrix_, camera_->GetViewMatrix(), camera_->GetOrthoMatrix(), camera_->GetViewportMatrix());
+//	screenVertex_ = Transform(localVertex_, wvpVpMatrix_);
+//}

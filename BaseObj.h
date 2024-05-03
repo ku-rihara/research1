@@ -1,15 +1,16 @@
 ﻿#pragma once
 #include<Novice.h>
 #include"struct.h"
+//class
+#include"Camera.h"
+#include"MiniCamera.h"
+#include"mapchip.h"
 
-//前方宣言
-class Camera;
-class Mapchip;
 
 class BaseObj{
 protected:
 	////包含
-	
+	MiniCamera* miniCamera_;
 	Camera* camera_;
 	Mapchip* mapchip_;
 
@@ -37,18 +38,27 @@ protected:
 	Vertex localVertex_;
 	Matrix3x3 matrix_;
 	Matrix3x3 wvpVpMatrix_;
+
+	Vertex MiniScreenVertex_;
+	Vertex MiniLocalVertex_;
+	Matrix3x3 MiniMatrix_;
+	Matrix3x3 MiniwvpVpMatrix_;
 public:
 	BaseObj();//コンストラクタ
 	~BaseObj();//デストラクタ
 
 	virtual void Init();
 	virtual void RenderingPipeline();
+	virtual void MiniRenderingPipeline();
 	virtual void MapChipColligion();
 	
 	Vector2 GetWorldPos()const { return worldPos_; }
 	Vertex GetScreenVertex()const { return screenVertex_; }
 	Vector2 GetRadius()const { return radius_; }
 
+	void SetCamera(Camera* camera) { camera_ = camera; }
+	void SetMiniCamera(MiniCamera* mcamera) { miniCamera_ = mcamera; }
+	void SetMapChip(Mapchip* mapchip) { mapchip_ = mapchip; }
 	void SetWorldPos(Vector2 pos) { this->worldPos_ = pos; }
 	void SetWorldPosX(float pos) { this->worldPos_.x = pos; }
 	void SetWorldPosY(float pos) { this->worldPos_.y = pos; }

@@ -1,14 +1,10 @@
 ﻿#include "Player.h"
 #include"BoxRelated.h"
 #include"InputManager.h"
-//class
-#include"mapchip.h"
-#include"Camera.h"
+
 
 Player::Player() {
-	Init();
-	mapchip_ = new Mapchip();
-	camera_ = new Camera();
+
 	texture_.Handle = Novice::LoadTexture("white1x1.png");
 }
 
@@ -31,39 +27,39 @@ void Player::Update() {
 	Move();
 
 	//スクロール範囲の制限
-	const float LeftMost = 248.0f* Camera::zoomLevel_.x;
-	const float RightMost = (mapchip_->GetMapchipSize()) * (mapxMax-16.5f * Camera::zoomLevel_.x) - (LeftMost);
-	const float TopMost = 240.0f * Camera::zoomLevel_.y;
-	const float BottomMost = (mapchip_->GetMapchipSize()) * (mapyMax-5 * Camera::zoomLevel_.y) - (TopMost);
+	const float LeftMost = 248.0f*camera_->GetZoomLevel().x;
+	const float RightMost = (mapchip_->GetMapchipSize()) * (mapxMax-16.5f * camera_->GetZoomLevel().x) - (LeftMost);
+	const float TopMost = 240.0f * camera_->GetZoomLevel().y;
+	const float BottomMost = (mapchip_->GetMapchipSize()) * (mapyMax-5 * camera_->GetZoomLevel().y) - (TopMost);
 
 	//カメラの動き
 	//X
 	if (worldPos_.x >= LeftMost && worldPos_.x <= RightMost) {
-		Camera::worldPos_.x = worldPos_.x - LeftMost;
+	camera_->SetPosX(worldPos_.x - LeftMost);
 	}
 	//スクロール範囲外はスクロールしない
 	else {
-		if (worldPos_.x <= LeftMost||Camera::zoomLevel_.x>= Camera::zoomOutMax_) {
-			Camera::worldPos_.x = 0;
+		if (worldPos_.x <= LeftMost|| camera_->GetZoomLevel().x >= zoomOutMax) {
+			camera_->SetPosX(0);
 		}
 
-		if (worldPos_.x >= RightMost&& Camera::zoomLevel_.x < Camera::zoomOutMax_) {
-			Camera::worldPos_.x = RightMost - LeftMost;
+		if (worldPos_.x >= RightMost&& camera_->GetZoomLevel().x < zoomOutMax) {
+			camera_->SetPosX(RightMost - LeftMost);
 		}
 	}
 
 	//Y
 	if (worldPos_.y >= TopMost && worldPos_.y <= BottomMost) {
-		Camera::worldPos_.y = worldPos_.y - TopMost;
+		camera_->SetPosY(worldPos_.y - TopMost);
 	}
 	//スクロール範囲外はスクロールしない
 	else {
 		if (worldPos_.y <= TopMost) {
-			Camera::worldPos_.y = 0;
+			camera_->SetPosY(0);
 		}
 
 		if (worldPos_.y >= BottomMost) {
-			Camera::worldPos_.y = BottomMost - TopMost;
+			camera_->SetPosY(BottomMost - TopMost);
 		}
 	}
 }
@@ -71,6 +67,10 @@ void Player::Update() {
 //描画
 void Player::Draw() {
 	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
+}
+
+void Player::MiniDraw() {
+	newDrawQuad(MiniScreenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
 }
 
 void Player::Move() {
@@ -104,6 +104,10 @@ void Player::Move() {
 //レンダリングパイプライン
 void Player::RenderingPipeline() {
 	BaseObj::RenderingPipeline();
+}
+
+void Player::MiniRenderingPipeline() {
+	BaseObj::MiniRenderingPipeline();
 }
 //マップチップとの当たり判定
 void Player::MapChipColligion() {

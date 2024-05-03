@@ -122,17 +122,17 @@
     <ClCompile Include="mapchip.cpp">
       <Filter>MapChip</Filter>
     </ClCompile>
-    <ClCompile Include="BaseMiniCamera.cpp">
+    <ClCompile Include="MiniCamera.cpp">
       <Filter>Camera\.cpp</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Camera\.cpp</Filter>
     </ClCompile>
-    <ClCompile Include="MiniCamera.cpp">
-      <Filter>Camera\.cpp</Filter>
-    </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>Object\.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseCamera.cpp">
+      <Filter>Camera\.cpp</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -238,13 +238,10 @@
     <ClInclude Include="mapchip.h">
       <Filter>MapChip</Filter>
     </ClInclude>
-    <ClInclude Include="BaseMiniCamera.h">
+    <ClInclude Include="MiniCamera.h">
       <Filter>Camera\.h</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>Camera\.h</Filter>
-    </ClInclude>
-    <ClInclude Include="MiniCamera.h">
       <Filter>Camera\.h</Filter>
     </ClInclude>
     <ClInclude Include="C:\KamataEngine\DirectXGame\2d\ImGuiManager.h">
@@ -268,6 +265,9 @@
     <ClInclude Include="struct.h" />
     <ClInclude Include="BackGround.h">
       <Filter>Object\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseCamera.h">
+      <Filter>Camera\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

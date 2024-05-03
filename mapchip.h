@@ -17,10 +17,12 @@ enum BlockType {
 };
 
 class Camera;
+class MiniCamera;//一応
 //マップチップクラス
 class Mapchip {
 private:
 	Camera* camera_;
+	MiniCamera* miniCamera_;
 	//pos
 	Vector2 scrollPos_;
 	Vector2 worldPos_[mapyMax][mapxMax];
@@ -47,7 +49,9 @@ public:
 	void RenderingPipeline();
 
 	//setter
-	void SetCamelaMatrix(Camera* camelamatrix) { camera_ = camelamatrix; }
+	void SetCamera(Camera* camera) { camera_ = camera; }
+	void SetCamera(MiniCamera* mcamera) { miniCamera_ = mcamera; }
+	void SetMiniCamera(MiniCamera* mcamera) { miniCamera_ = mcamera; }
 	void SetScrollPosX(float scrollPosX) { this->scrollPos_.x = scrollPosX; }
 
 	//getter
