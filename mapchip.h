@@ -32,6 +32,11 @@ private:
 	Matrix3x3 wvMatrix_[mapyMax][mapxMax];
 	Vertex ScreenVertex_[mapyMax][mapxMax];
 	Vertex localVertex_;
+	//ミニカメラ
+	Matrix3x3 miniMatrix_[mapyMax][mapxMax];
+	Matrix3x3 miniwvMatrix_[mapyMax][mapxMax];
+	Vertex miniScreenVertex_[mapyMax][mapxMax];
+
 	//size,texture
 	float size_;
 	GH mapTexture;
@@ -45,12 +50,13 @@ public:
 	void Init();
 	void Update();
 	void Draw();
-
 	void RenderingPipeline();
+
+	void MiniDraw();
+	void MiniRenderingPipeline();
 
 	//setter
 	void SetCamera(Camera* camera) { camera_ = camera; }
-	void SetCamera(MiniCamera* mcamera) { miniCamera_ = mcamera; }
 	void SetMiniCamera(MiniCamera* mcamera) { miniCamera_ = mcamera; }
 	void SetScrollPosX(float scrollPosX) { this->scrollPos_.x = scrollPosX; }
 

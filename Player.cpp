@@ -103,10 +103,12 @@ void Player::Move() {
 
 //レンダリングパイプライン
 void Player::RenderingPipeline() {
+	camera_->MakeCamelaMatrix();
 	BaseObj::RenderingPipeline();
 }
 
 void Player::MiniRenderingPipeline() {
+	miniCamera_->MakeCamelaMatrix();
 	BaseObj::MiniRenderingPipeline();
 }
 //マップチップとの当たり判定

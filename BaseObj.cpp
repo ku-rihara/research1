@@ -27,14 +27,15 @@ void BaseObj::Init() {
 //レンダリングパイプライン
 void BaseObj::RenderingPipeline() {
 
-	camera_->MakeCamelaMatrix();
+	//camera_->MakeCamelaMatrix();
 	matrix_ = MakeAffineMatrix(scale_, theta_, worldPos_);
 	wvpVpMatrix_ = wvpVpMatrix(matrix_, camera_->GetViewMatrix(), camera_->GetOrthoMatrix(), camera_->GetViewportMatrix());
 	screenVertex_ = Transform(localVertex_, wvpVpMatrix_);
 }
+
 //ミニカメラのレンダリングパイプライン
 void BaseObj::MiniRenderingPipeline() {
-	miniCamera_->MakeCamelaMatrix();
+	//miniCamera_->MakeCamelaMatrix();
 	MiniMatrix_ = MakeAffineMatrix(scale_, theta_, worldPos_);
 	MiniwvpVpMatrix_ = wvpVpMatrix(MiniMatrix_, miniCamera_->GetViewMatrix(), miniCamera_->GetOrthoMatrix(), miniCamera_->GetViewportMatrix());
 	MiniScreenVertex_ = Transform(localVertex_, MiniwvpVpMatrix_);

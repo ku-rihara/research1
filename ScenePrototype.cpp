@@ -15,7 +15,7 @@ ScenePrototype::ScenePrototype() {
 	backGround_->SetCamera(camera_);
 	//ミニカメラ
 	player_->SetMiniCamera(miniCamera_);
-	/*mapchip_->SetMiniCamera(minicamera_);*/
+	mapchip_->SetMiniCamera(miniCamera_);
 	backGround_->SetMiniCamera(miniCamera_);
 	player_->SetMapChip(mapchip_);
 
@@ -32,18 +32,22 @@ void ScenePrototype::Init() {
 
 void ScenePrototype::Update() {
 	camera_->Update();//カメラの更新
+	miniCamera_->Update();
 	player_->Update();//プレイヤーの更新
 	mapchip_->Update();//マップチップの更新
 	
 	//当たり判定
 	player_->MapChipColligion();
-	backGround_->Update();
+
 
 	//レンダリングパイプライン	
 	player_->RenderingPipeline();
 	mapchip_->RenderingPipeline();
+	backGround_->RenderingPipeline();
 
 	player_->MiniRenderingPipeline();
+	mapchip_->MiniRenderingPipeline();
+	backGround_->MiniRenderingPipeline();
 }
 
 void ScenePrototype::Draw() {
@@ -51,8 +55,15 @@ void ScenePrototype::Draw() {
 	Novice::ScreenPrintf(200, 220, "%f", player_->GetWorldPos().y);
 	Novice::ScreenPrintf(200, 270, "%f", camera_->GetWorldPos().x);
 	Novice::ScreenPrintf(200, 280, "%f", camera_->GetWorldPos().y);
-	/*backGround_->Draw();*/
+	backGround_->Draw();
+	/*backGround_->MiniDraw();*/
 	mapchip_->Draw();
 	player_->Draw();
 	player_->MiniDraw();
+	mapchip_->MiniDraw();
+
+	//カメラの点
+	Novice::DrawEllipse(int(backGround_->GetScreenCenter().x), int(backGround_->GetScreenCenter().y), 10, 10, 0, RED, kFillModeSolid);
+	Novice::DrawEllipse(int(backGround_->GetMiniScreenCenter().x), int(backGround_->GetMiniScreenCenter().y), 10, 10, 0, RED, kFillModeSolid);
+
 }

@@ -20,14 +20,20 @@ void BackGround::Init() {
 	camera_->SetBackPos(Vector2(640,360));
 }
 
-void BackGround::Update() {
+void BackGround::RenderingPipeline() {
 	camera_->MakeBackCamelaMatrix();
-	matrix_ = MakeAffineMatrix(scale_, theta_, worldPos_);
-	wvpVpMatrix_ = wvpVpMatrix(matrix_, camera_->GetViewMatrix(), camera_->GetOrthoMatrix(), camera_->GetViewportMatrix());
-	screenVertex_ = Transform(localVertex_, wvpVpMatrix_);
+	BaseObj::RenderingPipeline();
+}
+
+void BackGround::MiniRenderingPipeline() {
+	miniCamera_->MakeBackCamelaMatrix();
+	BaseObj::MiniRenderingPipeline();
 }
 
 void BackGround::Draw() {
 	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
 }
 
+void BackGround::MiniDraw() {
+	newDrawQuad(MiniScreenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
+}

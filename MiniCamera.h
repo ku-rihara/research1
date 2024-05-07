@@ -13,8 +13,9 @@ public:
 	MiniCamera();
 	~MiniCamera();
 	 void Init()override;
+	 void Update()override;
 	 void MakeCamelaMatrix()override;
-
+	 void MakeBackCamelaMatrix()override;
 };
 
 

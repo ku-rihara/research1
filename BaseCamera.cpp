@@ -18,13 +18,14 @@ void BaseCamera::Init() {
 	orthoMatrix_ = {};
 	viewportMatrix_ = {};
 	viewprot_={ 0,0,1280,720 };
+	orthoGraphic_ = { 0,0,1280,720 };
 }
 
 void BaseCamera::MakeCamelaMatrix() {
 
 	worldMatrix_ = MakeAffineMatrix(zoomLevel_, 0, worldPos_);
 	viewMatrix_ = InverseMatrix(worldMatrix_);
-	orthoMatrix_ = MakeOrthographicMatrix(0, 0, 1280, 720);
+	orthoMatrix_ = MakeOrthographicMatrix(orthoGraphic_.left, orthoGraphic_.top, orthoGraphic_.width, orthoGraphic_.height);
 	viewportMatrix_ = MakeViewwportmatrix(viewprot_.left, viewprot_.top, viewprot_.width, viewprot_.height);
 }
 

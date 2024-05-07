@@ -11,8 +11,8 @@ public:
 	~Camera();
 	void Init()override;
 	void Update()override;
-	void MakeCamelaMatrix();
-	void MakeBackCamelaMatrix();
+	void MakeCamelaMatrix()override;
+	void MakeBackCamelaMatrix()override;
 	/*void ZoomOut();
 	void ZoomIn();*/
 };

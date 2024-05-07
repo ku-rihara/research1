@@ -97,6 +97,19 @@ void Mapchip::RenderingPipeline() {
 	}
 }
 
+void Mapchip::MiniRenderingPipeline() {
+	for (int y = 0; y < mapyMax; y++) {
+		for (int x = 0; x < mapxMax; x++) {
+			//マップチップ行列の作成
+			miniCamera_->MakeCamelaMatrix();
+			miniMatrix_[y][x] = MakeAffineMatrix(scale_, 0, worldPos_[y][x]);
+			miniwvMatrix_[y][x] = wvpVpMatrix(miniMatrix_[y][x], miniCamera_->GetViewMatrix(), miniCamera_->GetOrthoMatrix(), miniCamera_->GetViewportMatrix());
+			//スクリーンに変換＆描画
+			miniScreenVertex_[y][x] = Transform(localVertex_, miniwvMatrix_[y][x]);
+		}
+	}
+}
+
 void Mapchip::Draw() {
 	//スクロール座標の取得
 	scrollPos_ = camera_->GetWorldPos();
@@ -104,9 +117,24 @@ void Mapchip::Draw() {
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {	
 			//画面内のみ描画する
-			if (worldPos_[y][x].x - scrollPos_.x >= -size_ * camera_->GetZoomLevel().x && worldPos_[y][x].x - scrollPos_.x <= (kWindowSizeX + size_) * camera_->GetZoomLevel().x && worldPos_[y][x].y - scrollPos_.y >= -size_ * camera_->GetZoomLevel().y && worldPos_[y][x].y - scrollPos_.y <= (kWindowSizeY + size_) * camera_->GetZoomLevel().y) {
+			if (worldPos_[y][x].x - scrollPos_.x >= -(size_*2.0f) * camera_->GetZoomLevel().x && worldPos_[y][x].x - scrollPos_.x <= (kWindowSizeX + (size_ *2.0f)) * camera_->GetZoomLevel().x && worldPos_[y][x].y - scrollPos_.y >=  - (size_ * 2.0f)* camera_->GetZoomLevel().y && worldPos_[y][x].y - scrollPos_.y <= (kWindowSizeY + (size_ * 2.0f)) * camera_->GetZoomLevel().y) {
 				if (map[y][x] == BLOCK) {
 					newDrawQuad(ScreenVertex_[y][x], 0, 0, size_, size_, mapTexture.Handle, WHITE);
+				}
+			}
+		}
+	}
+}
+void Mapchip::MiniDraw() {
+	//スクロール座標の取得
+	scrollPos_ = camera_->GetWorldPos();
+
+	for (int y = 0; y < mapyMax; y++) {
+		for (int x = 0; x < mapxMax; x++) {
+			//画面内のみ描画する
+			if (worldPos_[y][x].x - scrollPos_.x >= -size_ * camera_->GetZoomLevel().x && worldPos_[y][x].x - scrollPos_.x <= (kWindowSizeX + size_) * camera_->GetZoomLevel().x && worldPos_[y][x].y - scrollPos_.y >= -size_ * camera_->GetZoomLevel().y && worldPos_[y][x].y - scrollPos_.y <= (kWindowSizeY + size_) * camera_->GetZoomLevel().y) {
+				if (map[y][x] == BLOCK) {
+					newDrawQuad(miniScreenVertex_[y][x], 0, 0, size_, size_, mapTexture.Handle, WHITE);
 				}
 			}
 		}

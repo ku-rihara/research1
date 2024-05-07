@@ -6,12 +6,19 @@ struct ViewPort{
 	float width;
 	float height;
  };
+struct OrthoGraphic {
+	float left;
+	float top;
+	float width;
+	float height;
+};
 class BaseCamera{
 protected:
 	//Pos,ZoomLevel
 	 Vector2 worldPos_;
 	Vector2 backPos_;
 	ViewPort viewprot_;
+	OrthoGraphic orthoGraphic_;
 	//Matrix
 	Matrix3x3 worldMatrix_;
 	Matrix3x3 viewMatrix_;
