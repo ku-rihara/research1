@@ -3,7 +3,8 @@
 //function
 #include"Matrix3x3.h"
 #include"BoxRelated.h"
-#include"Camera.h"
+//class
+#include"Monitor.h"
 
 MiniCamera::MiniCamera() {
 
@@ -15,28 +16,25 @@ MiniCamera::~MiniCamera() {
 
 void MiniCamera::Init() {
 	BaseCamera::Init();
-	viewprot_ = { 0,0,640,320 };
+	viewprot_ = { 0,0,1280/ miniLevel_,720/ miniLevel_ };
 	orthoGraphic_ = { 0,0,1280,720 };
+	backViewprot_ = { 0,0,640,320 };
+	backOrthoGraphic_ = { -640/miniLevel_, -360/ miniLevel_, 640/ miniLevel_, 360/ miniLevel_ };
 }
 
-void MiniCamera::Update() {
-	BaseCamera::Update();
+void MiniCamera::Update(const Player& player, const Mapchip& mapchip) {
+	BaseCamera::Update( player,mapchip);
+	
+
 }
 void MiniCamera::MakeCamelaMatrix() {
 	BaseCamera::MakeCamelaMatrix();
-
-	/*worldMatrix_ = MakeAffineMatrix(Camera::zoomLevel_, 0, Camera::worldPos_);
-	viewMatrix_ = InverseMatrix(worldMatrix_);
-	orthoMatrix_ = MakeOrthographicMatrix(0, 0, 1280, 720);
-	viewportMatrix_ = MakeViewwportmatrix(monitorPos_.x, monitorPos_.y, 1280.0f/2, 720.0f/2);*/
-}
+	}
 
 void MiniCamera::MakeBackCamelaMatrix() {
 	BaseCamera::MakeBackCamelaMatrix();
 }
 
-//void MiniCamera::RenderingPipeline() {
-//	matrix_ = MakeAffineMatrix(scale_, theta_, worldPos_);
-//	wvpVpMatrix_ = wvpVpMatrix(matrix_, camera_->GetViewMatrix(), camera_->GetOrthoMatrix(), camera_->GetViewportMatrix());
-//	screenVertex_ = Transform(localVertex_, wvpVpMatrix_);
-//}
+void MiniCamera::CombineMonitor(const Monitor& monitor) {
+	viewprot_ = { monitor.GetScreenVertex().LeftTop.x, monitor.GetScreenVertex().LeftTop.y,monitor.GetScreenVertex().LeftTop.x+monitor.GetSize().x,monitor.GetScreenVertex().LeftTop.y + monitor.GetSize().y};
+}

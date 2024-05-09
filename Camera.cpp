@@ -25,7 +25,7 @@ void Camera::MakeBackCamelaMatrix() {
 	BaseCamera::MakeBackCamelaMatrix();
 }
 
-void Camera::Update() {
-	BaseCamera::Update();
+void Camera::Update(const Player& player, const Mapchip& mapchip) {
+	BaseCamera::Update(player,mapchip);
 }
 

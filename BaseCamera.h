@@ -12,13 +12,19 @@ struct OrthoGraphic {
 	float width;
 	float height;
 };
+class Player;
+class Mapchip;
 class BaseCamera{
 protected:
+	Player* player_;
+	Mapchip* mapchip_;
 	//Pos,ZoomLevel
 	 Vector2 worldPos_;
 	Vector2 backPos_;
 	ViewPort viewprot_;
 	OrthoGraphic orthoGraphic_;
+	ViewPort backViewprot_;
+	OrthoGraphic backOrthoGraphic_;
 	//Matrix
 	Matrix3x3 worldMatrix_;
 	Matrix3x3 viewMatrix_;
@@ -27,10 +33,8 @@ protected:
 public:
 	 Vector2 zoomLevel_;
 
-	BaseCamera();
-	~BaseCamera();
 	virtual void Init();
-	virtual void Update();
+	virtual void Update(const Player& player, const Mapchip& mapchip);
 	virtual void MakeCamelaMatrix();
 	virtual void MakeBackCamelaMatrix();
 	/*void ZoomOut();

@@ -10,7 +10,7 @@ public:
 	Camera();
 	~Camera();
 	void Init()override;
-	void Update()override;
+	void Update(const Player& player, const Mapchip& mapchip)override;
 	void MakeCamelaMatrix()override;
 	void MakeBackCamelaMatrix()override;
 	/*void ZoomOut();

@@ -7,6 +7,7 @@
 #include"Camera.h"
 #include "MiniCamera.h"
 #include"BackGround.h"
+#include"Monitor.h"
 
 class ScenePrototype:public BaseScene{
 private:
@@ -15,6 +16,7 @@ private:
 	Camera* camera_;
 	MiniCamera* miniCamera_;
 	BackGround* backGround_;
+	Monitor* monitor_;
 public:
 	ScenePrototype();//コンストラクタ
 	//Function

@@ -26,42 +26,6 @@ void Player::Update() {
 	oldWorldPos_.y = worldPos_.y;
 	Move();
 
-	//スクロール範囲の制限
-	const float LeftMost = 248.0f*camera_->GetZoomLevel().x;
-	const float RightMost = (mapchip_->GetMapchipSize()) * (mapxMax-16.5f * camera_->GetZoomLevel().x) - (LeftMost);
-	const float TopMost = 240.0f * camera_->GetZoomLevel().y;
-	const float BottomMost = (mapchip_->GetMapchipSize()) * (mapyMax-5 * camera_->GetZoomLevel().y) - (TopMost);
-
-	//カメラの動き
-	//X
-	if (worldPos_.x >= LeftMost && worldPos_.x <= RightMost) {
-	camera_->SetPosX(worldPos_.x - LeftMost);
-	}
-	//スクロール範囲外はスクロールしない
-	else {
-		if (worldPos_.x <= LeftMost|| camera_->GetZoomLevel().x >= zoomOutMax) {
-			camera_->SetPosX(0);
-		}
-
-		if (worldPos_.x >= RightMost&& camera_->GetZoomLevel().x < zoomOutMax) {
-			camera_->SetPosX(RightMost - LeftMost);
-		}
-	}
-
-	//Y
-	if (worldPos_.y >= TopMost && worldPos_.y <= BottomMost) {
-		camera_->SetPosY(worldPos_.y - TopMost);
-	}
-	//スクロール範囲外はスクロールしない
-	else {
-		if (worldPos_.y <= TopMost) {
-			camera_->SetPosY(0);
-		}
-
-		if (worldPos_.y >= BottomMost) {
-			camera_->SetPosY(BottomMost - TopMost);
-		}
-	}
 }
 
 //描画
@@ -70,7 +34,7 @@ void Player::Draw() {
 }
 
 void Player::MiniDraw() {
-	newDrawQuad(MiniScreenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, WHITE);
+	newDrawQuad(MiniScreenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, RED);
 }
 
 void Player::Move() {

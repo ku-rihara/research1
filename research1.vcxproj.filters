@@ -134,6 +134,9 @@
     <ClCompile Include="BaseCamera.cpp">
       <Filter>Camera\.cpp</Filter>
     </ClCompile>
+    <ClCompile Include="Monitor.cpp">
+      <Filter>Object\.cpp</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="C:\KamataEngine\DirectXGame\audio\Audio.h">
@@ -268,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="BaseCamera.h">
       <Filter>Camera\.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Monitor.h">
+      <Filter>Object\.h</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
