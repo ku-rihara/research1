@@ -71,7 +71,7 @@ void ScenePrototype::Draw() {
 	Novice::ScreenPrintf(200, 220, "%f", miniCamera_->GetWorldPos().y);
 	Novice::ScreenPrintf(200, 270, "%f", camera_->GetWorldPos().x);
 	Novice::ScreenPrintf(200, 280, "%f", camera_->GetWorldPos().y);
-	Novice::DrawEllipse(int(backGround_->GetScreenCenter().x), int(backGround_->GetScreenCenter().y), 10, 10, 0, RED, kFillModeSolid);
-	Novice::DrawEllipse(int(backGround_->GetMiniScreenCenter().x), int(backGround_->GetMiniScreenCenter().y), 10, 10, 0, GREEN, kFillModeSolid);
+	/*Novice::DrawEllipse(int(backGround_->GetScreenCenter().x), int(backGround_->GetScreenCenter().y), 10, 10, 0, RED, kFillModeSolid);
+	Novice::DrawEllipse(int(backGround_->GetMiniScreenCenter().x), int(backGround_->GetMiniScreenCenter().y), 10, 10, 0, GREEN, kFillModeSolid);*/
 
 }

@@ -47,6 +47,7 @@ public:
 	Matrix3x3 GetViewportMatrix()const { return viewportMatrix_; }
 	Vector2 GetWorldPos()const { return worldPos_; }
 	Vector2 GetZoomLevel()const { return zoomLevel_; }
+	ViewPort GetViewPort()const { return viewprot_; }
 
 	//setter
 	void SetPosX(float posX) { this->worldPos_.x = posX; }

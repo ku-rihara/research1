@@ -37,6 +37,13 @@ private:
 	Matrix3x3 miniwvMatrix_[mapyMax][mapxMax];
 	Vertex miniScreenVertex_[mapyMax][mapxMax];
 
+	//ビューポートの値
+	float viewportWidth_ ;
+	float viewportHeight_;
+	float miniViewportLeft_;
+	float miniViewportTop_;
+	float miniViewportWidth_;
+	float miniViewportHeight_;
 	//size,texture
 	float size_;
 	GH mapTexture;
@@ -62,7 +69,8 @@ public:
 
 	//getter
 	Vector2 GetScrollPos() const { return scrollPos_; }
-	Vector2 GetPos(int x, int y)const { return worldPos_[y][x]; }
+	Vector2 GetScreenCenter(int x, int y)const { return Vector2(ScreenVertex_[y][x].LeftTop.x + size_ / 2, ScreenVertex_[y][x].LeftTop.y + size_ / 2); }
+	Vector2 GetPos(int y, int x)const { return worldPos_[y][x]; }
 	float GetMapchipSize()const { return size_; }
 };
 
