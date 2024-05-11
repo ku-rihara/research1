@@ -36,5 +36,5 @@ void MiniCamera::MakeBackCamelaMatrix() {
 }
 
 void MiniCamera::CombineMonitor(const Monitor& monitor) {
-	viewprot_ = { monitor.GetScreenVertex().LeftTop.x, monitor.GetScreenVertex().LeftTop.y,monitor.GetScreenVertex().LeftTop.x+monitor.GetSize().x,monitor.GetScreenVertex().LeftTop.y + monitor.GetSize().y};
+	viewprot_ = { monitor.GetScreenVertex().LeftTop.x, monitor.GetScreenVertex().LeftTop.y,monitor.GetScreenVertex().RightBottom.x,monitor.GetScreenVertex().RightBottom.y};
 }

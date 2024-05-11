@@ -3,7 +3,7 @@
 #include "Player.h"
 #include"BoxRelated.h"
 #include"InputManager.h"
-
+#include<imgui.h>
 
 Monitor::Monitor() {
 	texture_.Handle = Novice::LoadTexture("white1x1.png");
@@ -23,6 +23,9 @@ void Monitor::Init() {
 
 //更新
 void Monitor::Update() {
+	ImGui::Begin("Window");
+	ImGui::DragFloat2("MonitorScreenPos(L)", &screenVertex_.LeftTop.x, 0.01f);
+	ImGui::End();
 	oldWorldPos_.x = worldPos_.x;
 	oldWorldPos_.y = worldPos_.y;	
 }

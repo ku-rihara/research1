@@ -69,7 +69,8 @@ public:
 
 	//getter
 	Vector2 GetScrollPos() const { return scrollPos_; }
-	Vector2 GetScreenCenter(int x, int y)const { return Vector2(ScreenVertex_[y][x].LeftTop.x + size_ / 2, ScreenVertex_[y][x].LeftTop.y + size_ / 2); }
+	Vertex GetScreenVertex(int y, int x)const { return ScreenVertex_[y][x]; }
+	Vector2 GetScreenCenter(int y, int x)const { return Vector2(ScreenVertex_[y][x].LeftTop.x + size_ / 2, ScreenVertex_[y][x].LeftTop.y + size_ / 2); }
 	Vector2 GetPos(int y, int x)const { return worldPos_[y][x]; }
 	float GetMapchipSize()const { return size_; }
 };

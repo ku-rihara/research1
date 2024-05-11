@@ -4,6 +4,7 @@
 #include"SceneManager.h"
 #include"BaseScene.h"
 
+
 const char kWindowTitle[] = "LC1A_12_クリハラ_ケイタ_タイトル";
 
 // Windowsアプリでのエントリーポイント(main関数)

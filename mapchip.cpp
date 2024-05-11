@@ -8,6 +8,7 @@
 //class
 #include"Camera.h"
 #include"MiniCamera.h"
+#include<imgui.h>
 
 Mapchip::Mapchip() {
 
@@ -75,6 +76,10 @@ void Mapchip::fileLoad() {
 
 void Mapchip::Update() {
 
+	ImGui::Begin("Window");
+	ImGui::DragFloat2("MapChipMiniScreenPos(L)", &ScreenVertex_[0][0].LeftTop.x, 0.01f);
+	ImGui::End();
+
 	//マップチップの座標取得
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {
@@ -139,10 +144,10 @@ void Mapchip::MiniDraw() {
 	miniViewportHeight_ = miniCamera_->GetViewPort().height * camera_->GetZoomLevel().y;
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {
-			bool withinX = (worldPos_[y][x].x + (size_ / 2)/miniCamera_->GetMiniLevel() >= miniViewportLeft_-scrollPos_.x) && (worldPos_[y][x].x - (size_ / 2) / miniCamera_->GetMiniLevel() <= scrollPos_.x + miniViewportWidth_);
-			bool withinY = (worldPos_[y][x].y + (size_ / 2) / miniCamera_->GetMiniLevel() >= miniViewportTop_ -scrollPos_.y) && (worldPos_[y][x].y - (size_ / 2) / miniCamera_->GetMiniLevel() <= scrollPos_.y + miniViewportHeight_);
+			/*bool withinX = (worldPos_[y][x].x + (size_ / 2)/miniCamera_->GetMiniLevel() >= miniViewportLeft_-scrollPos_.x) && (worldPos_[y][x].x - (size_ / 2) / miniCamera_->GetMiniLevel() <= scrollPos_.x + miniViewportWidth_);
+			bool withinY = (worldPos_[y][x].y + (size_ / 2) / miniCamera_->GetMiniLevel() >= miniViewportTop_ -scrollPos_.y) && (worldPos_[y][x].y - (size_ / 2) / miniCamera_->GetMiniLevel() <= scrollPos_.y + miniViewportHeight_);*/
 
-			if (withinX && withinY && map[y][x] == BLOCK) {
+			if (/*withinX && withinY*/  map[y][x] == BLOCK) {
 				newDrawQuad(miniScreenVertex_[y][x], 0, 0, size_, size_, mapTexture.Handle, RED);
 			}
 
