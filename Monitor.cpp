@@ -6,7 +6,7 @@
 #include<imgui.h>
 
 Monitor::Monitor() {
-	texture_.Handle = Novice::LoadTexture("white1x1.png");
+	texture_.Handle = Novice::LoadTexture("./Resources/SkyBackgraund.png");
 }
 
 Monitor::~Monitor() {
@@ -31,10 +31,9 @@ void Monitor::Update() {
 }
 
 //描画
-void Monitor::Draw() {
-	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, 0xffffffee);
+void Monitor::Draw(Vector2 Texturesize) {
+	newDrawQuad(screenVertex_, 0, 0, Texturesize.x, Texturesize.y, texture_.Handle, 0xffffffee);
 }
-
 
 //レンダリングパイプライン
 void Monitor::RenderingPipeline() {

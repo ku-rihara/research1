@@ -60,11 +60,11 @@ void ScenePrototype::Update() {
 
 void ScenePrototype::Draw() {
 
-	//backGround_->Draw();
-	/*backGround_->MiniDraw();*/
+	backGround_->Draw();
+	backGround_->MiniDraw();
 	mapchip_->Draw();
 	player_->Draw();
-	monitor_->Draw();
+	/*monitor_->Draw(backGround_->GetSize());*/
 	player_->MiniDraw();
 	mapchip_->MiniDraw();
 

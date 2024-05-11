@@ -16,8 +16,9 @@ void BackGround::Init() {
 	scale_ = { 1,1 };
 	size_= { 1280,720 };
 	localVertex_ = MakeLoalVertex(size_);
-	worldPos_ = { 640,360 };
+	/*worldPos_ = { 640,360 };
 	camera_->SetBackPos(Vector2(640,360));
+	miniCamera_->SetBackPos(Vector2(640, 360));*/
 }
 
 void BackGround::RenderingPipeline() {

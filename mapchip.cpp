@@ -138,19 +138,14 @@ void Mapchip::MiniDraw() {
 	//スクロール座標の取得
 	scrollPos_ = camera_->GetWorldPos();
 
-	miniViewportLeft_ = miniCamera_->GetViewPort().left * camera_->GetZoomLevel().x;
-	miniViewportTop_ = miniCamera_->GetViewPort().top * camera_->GetZoomLevel().y;
-	miniViewportWidth_ = miniCamera_->GetViewPort().width * camera_->GetZoomLevel().x;
-	miniViewportHeight_ = miniCamera_->GetViewPort().height * camera_->GetZoomLevel().y;
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {
-			/*bool withinX = (worldPos_[y][x].x + (size_ / 2)/miniCamera_->GetMiniLevel() >= miniViewportLeft_-scrollPos_.x) && (worldPos_[y][x].x - (size_ / 2) / miniCamera_->GetMiniLevel() <= scrollPos_.x + miniViewportWidth_);
-			bool withinY = (worldPos_[y][x].y + (size_ / 2) / miniCamera_->GetMiniLevel() >= miniViewportTop_ -scrollPos_.y) && (worldPos_[y][x].y - (size_ / 2) / miniCamera_->GetMiniLevel() <= scrollPos_.y + miniViewportHeight_);*/
+			bool withinX = (worldPos_[y][x].x + size_ / 2 >= scrollPos_.x) && (worldPos_[y][x].x - size_ / 2 <= scrollPos_.x + viewportWidth_);
+			bool withinY = (worldPos_[y][x].y + size_ / 2 >= scrollPos_.y) && (worldPos_[y][x].y - size_ / 2 <= scrollPos_.y + viewportHeight_);
 
-			if (/*withinX && withinY*/  map[y][x] == BLOCK) {
+			if (withinX && withinY && map[y][x] == BLOCK) {
 				newDrawQuad(miniScreenVertex_[y][x], 0, 0, size_, size_, mapTexture.Handle, RED);
 			}
-
 		}
 	}
 }
