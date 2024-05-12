@@ -35,14 +35,14 @@ void ScenePrototype::Init() {
 
 void ScenePrototype::Update() {
 
-
+	monitor_->Update();
+	mapchip_->Update();//マップチップの更新
 	camera_->Update(*player_,*mapchip_);//カメラの更新
 	miniCamera_->Update(*player_, *mapchip_);
 	miniCamera_->CombineMonitor(*monitor_);
 	player_->Update();//プレイヤーの更新
-	mapchip_->Update();//マップチップの更新
-	monitor_->Update();
-
+	
+	
 	//当たり判定
 	player_->MapChipColligion();
 
