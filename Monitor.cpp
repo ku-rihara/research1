@@ -32,7 +32,7 @@ void Monitor::Update() {
 
 //描画
 void Monitor::Draw() {
-	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, 0xffffffee);
+	newDrawQuad(screenVertex_, 0, 0, size_.x+48, size_.y+48, texture_.Handle, WHITE);
 }
 
 //レンダリングパイプライン

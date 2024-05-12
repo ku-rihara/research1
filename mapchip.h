@@ -33,9 +33,9 @@ private:
 	Vertex ScreenVertex_[mapyMax][mapxMax];
 	Vertex localVertex_;
 	//ミニカメラ
-	Matrix3x3 miniMatrix_;
-	Matrix3x3 miniwvMatrix_;
-	Vertex miniScreenVertex_;
+	Matrix3x3 miniMatrix_[mapyMax][mapxMax];
+	Matrix3x3 miniwvMatrix_[mapyMax][mapxMax];
+	Vertex miniScreenVertex_[mapyMax][mapxMax];
 	float dotLevel_;
 	Vertex localVertexDot_;
 
@@ -62,7 +62,7 @@ public:
 	void RenderingPipeline();
 
 	void MiniDraw();
-	/*void MiniRenderingPipeline();*/
+	void MiniRenderingPipeline();
 
 	//setter
 	void SetCamera(Camera* camera) { camera_ = camera; }
