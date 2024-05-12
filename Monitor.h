@@ -11,7 +11,7 @@ public:
 
 	void Init()override;
 	void Update();
-	void Draw(Vector2 Texturesize);
+	void Draw();
 
 	//その他関数
 	void RenderingPipeline()override;

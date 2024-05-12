@@ -6,7 +6,7 @@
 #include<imgui.h>
 
 Monitor::Monitor() {
-	texture_.Handle = Novice::LoadTexture("./Resources/SkyBackgraund.png");
+	texture_.Handle = Novice::LoadTexture("./Resources/monitor.png");
 }
 
 Monitor::~Monitor() {
@@ -24,15 +24,15 @@ void Monitor::Init() {
 //更新
 void Monitor::Update() {
 	ImGui::Begin("Window");
-	ImGui::DragFloat2("MonitorScreenPos(L)", &screenVertex_.LeftTop.x, 0.01f);
+	ImGui::DragFloat2("MonitorScreenPos(L)", &worldPos_.x, 1.0f);
 	ImGui::End();
 	oldWorldPos_.x = worldPos_.x;
 	oldWorldPos_.y = worldPos_.y;	
 }
 
 //描画
-void Monitor::Draw(Vector2 Texturesize) {
-	newDrawQuad(screenVertex_, 0, 0, Texturesize.x, Texturesize.y, texture_.Handle, 0xffffffee);
+void Monitor::Draw() {
+	newDrawQuad(screenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, 0xffffffee);
 }
 
 //レンダリングパイプライン

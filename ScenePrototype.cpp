@@ -64,9 +64,9 @@ void ScenePrototype::Draw() {
 	backGround_->MiniDraw();
 	mapchip_->Draw();
 	player_->Draw();
-	/*monitor_->Draw(backGround_->GetSize());*/
 	player_->MiniDraw();
 	mapchip_->MiniDraw();
+	monitor_->Draw();
 
 	//debug------------------------------------------------------------------------------------------------------------------
 	
