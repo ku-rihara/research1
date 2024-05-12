@@ -28,7 +28,7 @@ void Mapchip::Init() {
 		}
 	}
 
-	dotLevel_ =1.0f;
+	dotLevel_ =2.0f;
 	localVertexDot_ = MakeLoalVertex(dotLevel_);
 
 }
@@ -158,8 +158,8 @@ void Mapchip::MiniDraw() {
 			// ミニマップのビューポート内にある場合のみ描画
 			if (withinMiniX && withinMiniY && map[y][x] == BLOCK) {
 				// ブロックの各ドットごとに描画
-				for (int dotY = 0; dotY < blockSize; dotY++) {
-					for (int dotX = 0; dotX < blockSize; dotX++) {
+				for (int dotY = 0; dotY < blockSize; dotY+= int(dotLevel_)) {
+					for (int dotX = 0; dotX < blockSize; dotX+= int(dotLevel_) ){
 						// ドットがビューポート内にあるかどうかの判定
 						float dotWorldPosX = worldPos_[y][x].x - blockSize / 2 + dotX;
 						float dotWorldPosY = worldPos_[y][x].y - blockSize / 2 + dotY;
