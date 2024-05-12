@@ -53,8 +53,9 @@ void ScenePrototype::Update() {
 	backGround_->RenderingPipeline();
 	monitor_->RenderingPipeline();
 
+	//ミニレンダリングパイプライン	
 	player_->MiniRenderingPipeline();
-	mapchip_->MiniRenderingPipeline();
+	/*mapchip_->MiniRenderingPipeline();*/
 	backGround_->MiniRenderingPipeline();
 }
 
