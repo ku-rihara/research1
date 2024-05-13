@@ -33,11 +33,23 @@ private:
 	Vertex ScreenVertex_[mapyMax][mapxMax];
 	Vertex localVertex_;
 	//ミニカメラ
-	Matrix3x3 miniMatrix_;
-	Matrix3x3 miniwvMatrix_;
-	Vertex miniScreenVertex_;
+	Matrix3x3 miniMatrix_[mapyMax][mapxMax];
+	Matrix3x3 miniwvMatrix_[mapyMax][mapxMax];
+	Vertex miniScreenVertex_[mapyMax][mapxMax];
+	Vertex miniLoaclVertex[mapyMax][mapxMax];
 	float dotLevel_;
 	Vertex localVertexDot_;
+
+	float blockLeft_[mapxMax];
+	float blockRight_[mapxMax];
+	float blockTop_[mapyMax];
+	float blockBottom_[mapyMax];
+
+	// 描画範囲外に出た場合には、描画する部分を切り抜く
+	float drawLeft_[mapxMax];
+	float drawRight_[mapxMax];
+	float drawTop_[mapyMax];
+	float drawBottom_[mapyMax];
 
 	//ビューポートの値
 	float viewportWidth_ ;
@@ -62,7 +74,7 @@ public:
 	void RenderingPipeline();
 
 	void MiniDraw();
-	/*void MiniRenderingPipeline();*/
+	void MiniRenderingPipeline();
 
 	//setter
 	void SetCamera(Camera* camera) { camera_ = camera; }
