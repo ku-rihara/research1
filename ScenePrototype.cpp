@@ -19,7 +19,9 @@ ScenePrototype::ScenePrototype() {
 	player_->SetMiniCamera(miniCamera_);
 	mapchip_->SetMiniCamera(miniCamera_);
 	backGround_->SetMiniCamera(miniCamera_);
+	monitor_->SetMiniCamera(miniCamera_);
 	player_->SetMapChip(mapchip_);
+
 
 	//初期化
 	miniCamera_->Init();
@@ -35,13 +37,12 @@ void ScenePrototype::Init() {
 
 void ScenePrototype::Update() {
 
-
 	camera_->Update(*player_,*mapchip_);//カメラの更新
 	miniCamera_->Update(*player_, *mapchip_);
 	miniCamera_->CombineMonitor(*monitor_);
 	player_->Update();//プレイヤーの更新
 	mapchip_->Update();//マップチップの更新
-	monitor_->Update();
+	monitor_->Update(mapchip_->GetMapchipSize());
 
 	//当たり判定
 	player_->MapChipColligion();

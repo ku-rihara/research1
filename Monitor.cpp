@@ -1,9 +1,8 @@
 ﻿#include "Monitor.h"
-
-#include "Player.h"
 #include"BoxRelated.h"
 #include"InputManager.h"
 #include<imgui.h>
+
 
 Monitor::Monitor() {
 	texture_.Handle = Novice::LoadTexture("./Resources/monitor.png");
@@ -22,17 +21,20 @@ void Monitor::Init() {
 }
 
 //更新
-void Monitor::Update() {
+void Monitor::Update(float mapSize) {
 	ImGui::Begin("Window");
 	ImGui::DragFloat2("MonitorScreenPos(L)", &worldPos_.x, 1.0f);
 	ImGui::End();
+	mapTransformedSize_.x = mapSize * (size_.x /miniCamera_->GetOrthoGraphic().width);
+	mapTransformedSize_.y = mapSize * (size_.y / miniCamera_->GetOrthoGraphic().height);
+	drawSize_ = { 48.0f * 15 + (mapTransformedSize_.x),48.0f * 9 - (mapTransformedSize_.y)};
 	oldWorldPos_.x = worldPos_.x;
 	oldWorldPos_.y = worldPos_.y;	
 }
 
 //描画
 void Monitor::Draw() {
-	newDrawQuad(screenVertex_, 0, 0, size_.x+48, size_.y+48, texture_.Handle, WHITE);
+	newDrawQuad(screenVertex_, mapTransformedSize_.x, 0, drawSize_.x, drawSize_.y, texture_.Handle, WHITE);
 }
 
 //レンダリングパイプライン

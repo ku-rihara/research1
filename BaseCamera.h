@@ -48,6 +48,7 @@ public:
 	Vector2 GetWorldPos()const { return worldPos_; }
 	Vector2 GetZoomLevel()const { return zoomLevel_; }
 	ViewPort GetViewPort()const { return viewprot_; }
+	OrthoGraphic GetOrthoGraphic()const { return orthoGraphic_; }
 
 	//setter
 	void SetPosX(float posX) { this->worldPos_.x = posX; }

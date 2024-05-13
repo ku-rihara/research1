@@ -60,7 +60,6 @@ public:
 	Vector2 GetScreenCenter()const { return Vector2(screenVertex_.LeftTop.x + size_.x / 2, screenVertex_.LeftTop.y + size_.y / 2); }
 	Vector2 GetMiniScreenCenter()const { return Vector2(MiniScreenVertex_.LeftTop.x + size_.x / 2, MiniScreenVertex_.LeftTop.y + size_.y / 2); }
 
-
 	void SetCamera(Camera* camera) { camera_ = camera; }
 	void SetMiniCamera(MiniCamera* mcamera) { miniCamera_ = mcamera; }
 	void SetMapChip(Mapchip* mapchip) { mapchip_ = mapchip; }
