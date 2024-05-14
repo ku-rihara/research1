@@ -36,16 +36,13 @@ private:
 	Matrix3x3 miniMatrix_[mapyMax][mapxMax];
 	Matrix3x3 miniwvMatrix_[mapyMax][mapxMax];
 	Vertex miniScreenVertex_[mapyMax][mapxMax];
+	Vertex miniLoaclVertex[mapyMax][mapxMax];
 	float dotLevel_;
 	Vertex localVertexDot_;
 
 	//ビューポートの値
-	float viewportWidth_ ;
+	float viewportWidth_;
 	float viewportHeight_;
-	float miniViewportLeft_;
-	float miniViewportTop_;
-	float miniViewportWidth_;
-	float miniViewportHeight_;
 	//size,texture
 	float size_;
 	GH mapTexture;
