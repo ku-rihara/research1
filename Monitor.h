@@ -11,7 +11,7 @@ public:
 	~Monitor();//デストラクタ
 
 	void Init()override;
-	void Update(float  mapSize);
+	void Update();
 	void Draw();
 
 	//その他関数
