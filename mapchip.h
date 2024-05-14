@@ -40,24 +40,9 @@ private:
 	float dotLevel_;
 	Vertex localVertexDot_;
 
-	float blockLeft_[mapxMax];
-	float blockRight_[mapxMax];
-	float blockTop_[mapyMax];
-	float blockBottom_[mapyMax];
-
-	// 描画範囲外に出た場合には、描画する部分を切り抜く
-	float drawLeft_[mapxMax];
-	float drawRight_[mapxMax];
-	float drawTop_[mapyMax];
-	float drawBottom_[mapyMax];
-
 	//ビューポートの値
 	float viewportWidth_ ;
 	float viewportHeight_;
-	float miniViewportLeft_;
-	float miniViewportTop_;
-	float miniViewportWidth_;
-	float miniViewportHeight_;
 	//size,texture
 	float size_;
 	GH mapTexture;

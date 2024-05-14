@@ -83,7 +83,8 @@ void Mapchip::Update() {
 
 	ImGui::Begin("Window");
 	ImGui::DragFloat2("MapChipMiniScreenPos(L)", &ScreenVertex_[0][0].LeftTop.x, 0.01f);
-	ImGui::DragFloat2("MapChipMiniScreenPos(L)", &miniLoaclVertex[0][0].LeftTop.x, 0.01f);
+	ImGui::DragFloat2("MapChipMiniScreenPos(L)", &miniLoaclVertex[20][0].LeftTop.x, 0.01f);
+	ImGui::DragFloat2("MapChipMiniScreenPos(L)", &miniLoaclVertex[20][0].RightTop.x, 0.01f);
 	ImGui::End();
 
 	//マップチップの座標取得
@@ -91,63 +92,45 @@ void Mapchip::Update() {
 		for (int x = 0; x < mapxMax; x++) {
 			worldPos_[y][x].x = float(x * size_) + (size_ / 2);
 			worldPos_[y][x].y = float(y * size_) + (size_ / 2);
+
+
+			// ビューポート内にあるかどうかの判定
+			bool withinX = (worldPos_[y][x].x + size_ / 2 >= scrollPos_.x) && (worldPos_[y][x].x - size_ / 2 <= scrollPos_.x + viewportWidth_);
+			bool withinY = (worldPos_[y][x].y + size_ / 2 >= scrollPos_.y) && (worldPos_[y][x].y - size_ / 2 <= scrollPos_.y + viewportHeight_);
+
+			if (withinX && withinY && map[y][x] == BLOCK) {
+				// 左端がはみ出ている場合の調整
+				float localLeft = 0;
+				if (worldPos_[y][x].x - size_ / 2 < scrollPos_.x) {
+					localLeft = scrollPos_.x - (worldPos_[y][x].x - size_ / 2);
+				}
+
+				// 右端がはみ出ている場合の調整
+				float localRight = size_;
+				if (worldPos_[y][x].x + size_ / 2 > scrollPos_.x + viewportWidth_) {
+					localRight = size_ - ((worldPos_[y][x].x + size_ / 2) - (scrollPos_.x + viewportWidth_));
+				}
+
+				// 上端がはみ出ている場合の調整
+				float localTop = 0;
+				if (worldPos_[y][x].y - size_ / 2 < scrollPos_.y) {
+					localTop = scrollPos_.y - (worldPos_[y][x].y - size_ / 2);
+				}
+
+				// 下端がはみ出ている場合の調整
+				float localBottom = size_;
+				if (worldPos_[y][x].y + size_ / 2 > scrollPos_.y + viewportHeight_) {
+					localBottom = size_ - ((worldPos_[y][x].y + size_ / 2) - (scrollPos_.y + viewportHeight_));
+				}
+				miniLoaclVertex[y][x] = { Vector2(localLeft, localTop),
+										Vector2(localRight, localTop),
+										 Vector2(localRight, localBottom),
+										 Vector2(localLeft, localBottom),
+				};
+			}
 		}
 	}
 
-	//for (int y = 0; y < mapyMax; y++) {
-	//	for (int x = 0; x < mapxMax; x++) {
-
-	//		// ブロックの左上座標と右下座標を計算
-	//		blockLeft_[x] = worldPos_[y][x].x - size_ / 2;
-	//		blockRight_[x] = worldPos_[y][x].x + size_ / 2;
-	//		blockTop_[y] = worldPos_[y][x].y - size_ / 2;
-	//		blockBottom_[y] = worldPos_[y][x].y + size_ / 2;
-
-	//		// 描画範囲外に出た場合には、描画する部分を切り抜く
-	//		drawLeft_[x] = max(blockLeft_[x], scrollPos_.x);
-	//		drawRight_[x] = min(blockRight_[x], scrollPos_.x + viewportWidth_);
-	//		drawTop_[y] = max(blockTop_[y], scrollPos_.y);
-	//		drawBottom_[y] = min(blockBottom_[y], scrollPos_.y + viewportHeight_);
-
-
-	//			miniLoaclVertex[y][x] = { Vector2(drawLeft_[x] - scrollPos_.x ,drawTop_[y] - scrollPos_.y),
-	//									  Vector2(drawRight_[x] - drawLeft_[x],drawTop_[y] - scrollPos_.y),
-	//									  Vector2(drawLeft_[x] - scrollPos_.x,drawBottom_[y] - drawTop_[y]),
-	//									  Vector2(drawRight_[x] - drawLeft_[x],drawBottom_[y] - drawTop_[y]),
-	//			};
-	//		
-	//	}
-	//}
-
-	for (int y = 0; y < mapyMax; y++) {
-		for (int x = 0; x < mapxMax; x++) {
-
-			// ブロックの左上座標と右下座標を計算
-			float blockLeft = worldPos_[y][x].x - size_ / 2;
-			float blockRight = worldPos_[y][x].x + size_ / 2;
-			float blockTop = worldPos_[y][x].y - size_ / 2;
-			float blockBottom = worldPos_[y][x].y + size_ / 2;
-
-			// 描画範囲外に出た場合には、描画する部分を切り抜く
-			float drawLeft = max(blockLeft, scrollPos_.x);
-			float drawRight = min(blockRight, scrollPos_.x + viewportWidth_);
-			float drawTop = max(blockTop, scrollPos_.y);
-			float drawBottom = min(blockBottom, scrollPos_.y + viewportHeight_);
-
-			// ローカル頂点を計算
-			float width = drawRight - drawLeft;
-			float height = drawBottom - drawTop;
-			float offsetX = drawLeft - blockLeft;
-			float offsetY = drawTop - blockTop;
-
-			miniLoaclVertex[y][x] = {
-				Vector2(offsetX, offsetY),
-				Vector2(width, offsetY),
-				Vector2(offsetX, height),
-				Vector2(width, height)
-			};
-		}
-	}
 }
 
 void Mapchip::RenderingPipeline() {
@@ -171,7 +154,7 @@ void Mapchip::MiniRenderingPipeline() {
 			miniMatrix_[y][x] = MakeAffineMatrix(scale_, 0, worldPos_[y][x]);
 			miniwvMatrix_[y][x] = wvpVpMatrix(miniMatrix_[y][x], miniCamera_->GetViewMatrix(), miniCamera_->GetOrthoMatrix(), miniCamera_->GetViewportMatrix());
 			//スクリーンに変換＆描画
-			miniScreenVertex_[y][x] = Transform(localVertex_, miniwvMatrix_[y][x]);
+			miniScreenVertex_[y][x] = Transform(miniLoaclVertex[y][x], miniwvMatrix_[y][x]);
 		}
 	}
 }
@@ -203,10 +186,10 @@ void Mapchip::MiniDraw() {
 
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {
-			/*bool withinX = (worldPos_[y][x].x + size_ / 2 >= scrollPos_.x) && (worldPos_[y][x].x - size_ / 2 <= scrollPos_.x + viewportWidth_);
-			bool withinY = (worldPos_[y][x].y + size_ / 2 >= scrollPos_.y) && (worldPos_[y][x].y - size_ / 2 <= scrollPos_.y + viewportHeight_);*/
+			//bool withinX = (worldPos_[y][x].x + size_ / 2 >= scrollPos_.x) && (worldPos_[y][x].x - size_ / 2 <= scrollPos_.x + viewportWidth_);
+			//bool withinY = (worldPos_[y][x].y + size_ / 2 >= scrollPos_.y) && (worldPos_[y][x].y - size_ / 2 <= scrollPos_.y + viewportHeight_);
 
-			// 切り抜いた範囲が有効なら描画する
+			//// 切り抜いた範囲が有効なら描画する
 			if (/*withinX && withinY && */ map[y][x] == BLOCK) {
 				newDrawQuad(miniScreenVertex_[y][x], 0, 0, size_, size_, mapTexture.Handle, WHITE);
 				/*	newDrawQuad(miniScreenVertex_[y][x], 0,0,1,1, mapTexture.Handle, RED);*/
