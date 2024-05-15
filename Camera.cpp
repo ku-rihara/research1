@@ -4,6 +4,7 @@
 #include"Matrix3x3.h"
 //class
 #include"Camera.h"
+#include<imgui.h>
 
 Camera::Camera() {
 	Init();
@@ -26,6 +27,9 @@ void Camera::MakeBackCamelaMatrix() {
 }
 
 void Camera::Update(const Player& player, const Mapchip& mapchip) {
+	ImGui::Begin("Window");
+	ImGui::DragFloat2("ScrollPos", &worldPos_.x, 0.1f);
+	ImGui::End();
 	BaseCamera::Update(player,mapchip);
 }
 

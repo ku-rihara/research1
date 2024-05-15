@@ -1,7 +1,7 @@
 ﻿#include "Player.h"
 #include"BoxRelated.h"
 #include"InputManager.h"
-
+#include<imgui.h>
 
 Player::Player() {
 
@@ -25,7 +25,12 @@ void Player::Update() {
 	oldWorldPos_.x = worldPos_.x;
 	oldWorldPos_.y = worldPos_.y;
 	Move();
-
+	ImGui::Begin("Window");
+	ImGui::DragFloat2("PlayerLocal(LeftTop)", &localVertex_.LeftTop.x, 0.1f);
+	ImGui::DragFloat2("PlayerLocal(RightTop)", &localVertex_.RightTop.x, 0.1f);
+	ImGui::DragFloat2("PlayerLocal(LeftBottom)", &localVertex_.LeftBottom.x, 0.1f);
+	ImGui::DragFloat2("PlayerLocal(RightBottom)", &localVertex_.RightBottom.x, 0.1f);
+	ImGui::End();
 }
 
 //描画
