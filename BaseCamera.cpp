@@ -21,6 +21,22 @@ void BaseCamera::Init() {
 
 void BaseCamera::Update(const Player& player, const Mapchip& mapchip) {
 
+
+	//ズームイン
+	if (InputManager::GetIsPressKey(DIK_UP)) {
+		zoomLevel_ -= 0.01f;
+	}
+	//ズームアウト
+	else if (InputManager::GetIsPressKey(DIK_DOWN)) {
+		if (zoomLevel_.x < zoomOutMax) {
+			zoomLevel_ += 0.01f;
+		}
+		else {
+			zoomLevel_.x = zoomOutMax;
+			zoomLevel_.y = zoomOutMax;
+		}
+	}
+
 	//スクロール範囲の制限
 	const float LeftMost = 248.0f *zoomLevel_.x;
 	const float RightMost = (mapchip.GetMapchipSize()) * (mapxMax - 16.5f * zoomLevel_.x) - (LeftMost);
@@ -55,21 +71,6 @@ void BaseCamera::Update(const Player& player, const Mapchip& mapchip) {
 
 		if (player.GetWorldPos().y >= BottomMost) {
 			worldPos_.y = BottomMost - TopMost;
-		}
-	}
-
-	//ズームイン
-	if (InputManager::GetIsPressKey(DIK_UP)) {
-		zoomLevel_ -= 0.01f;
-	}
-	//ズームアウト
-	else if (InputManager::GetIsPressKey(DIK_DOWN)) {
-		if (zoomLevel_.x < zoomOutMax) {
-			zoomLevel_ += 0.01f;
-		}
-		else {
-			zoomLevel_.x = zoomOutMax;
-			zoomLevel_.y = zoomOutMax;
 		}
 	}
 }

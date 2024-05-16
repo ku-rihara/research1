@@ -37,9 +37,9 @@ private:
 	Matrix3x3 miniwvMatrix_[mapyMax][mapxMax];
 	Vertex miniScreenVertex_[mapyMax][mapxMax];
 	Vertex miniLoaclVertex[mapyMax][mapxMax];
-	float dotLevel_;
-	Vertex localVertexDot_;
 
+	Vector2 drawStart_[mapyMax][mapxMax];
+	Vector2 drawEnd_[mapyMax][mapxMax];
 	//ビューポートの値
 	float viewportWidth_;
 	float viewportHeight_;

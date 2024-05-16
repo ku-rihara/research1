@@ -40,9 +40,11 @@ protected:
 	Matrix3x3 wvpVpMatrix_;
 
 	Vertex MiniScreenVertex_;
-	Vertex MiniLocalVertex_;
+	Vertex miniLocalVertex_;
 	Matrix3x3 MiniMatrix_;
 	Matrix3x3 MiniwvpVpMatrix_;
+	Vector2 drawStart_;
+	Vector2 drawEnd_;
 public:
 	BaseObj();//コンストラクタ
 	~BaseObj();//デストラクタ

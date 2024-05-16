@@ -38,7 +38,7 @@ void BaseObj::MiniRenderingPipeline() {
 	//miniCamera_->MakeCamelaMatrix();
 	MiniMatrix_ = MakeAffineMatrix(scale_, theta_, worldPos_);
 	MiniwvpVpMatrix_ = wvpVpMatrix(MiniMatrix_, miniCamera_->GetViewMatrix(), miniCamera_->GetOrthoMatrix(), miniCamera_->GetViewportMatrix());
-	MiniScreenVertex_ = Transform(localVertex_, MiniwvpVpMatrix_);
+	MiniScreenVertex_ = Transform(miniLocalVertex_, MiniwvpVpMatrix_);
 }
 
 

@@ -34,24 +34,21 @@ void ScenePrototype::Init() {
 }
 
 void ScenePrototype::Update() {
-
-	monitor_->Update();
-	mapchip_->Update();//マップチップの更新
 	camera_->Update(*player_, *mapchip_);//カメラの更新
 	miniCamera_->Update(*player_, *mapchip_);
 	miniCamera_->CombineMonitor(*monitor_);
+	backGround_->Update();
+	monitor_->Update();
+	mapchip_->Update();//マップチップの更新
 	player_->Update();//プレイヤーの更新
-
-
 	//当たり判定
 	player_->MapChipColligion();
 
-
 	//レンダリングパイプライン	
-	player_->RenderingPipeline();
-	mapchip_->RenderingPipeline();
 	backGround_->RenderingPipeline();
 	monitor_->RenderingPipeline();
+	player_->RenderingPipeline();
+	mapchip_->RenderingPipeline();
 
 	//ミニレンダリングパイプライン	
 	player_->MiniRenderingPipeline();
@@ -64,10 +61,10 @@ void ScenePrototype::Draw() {
 	backGround_->Draw();
 	backGround_->MiniDraw();
 	mapchip_->Draw();
-	player_->Draw();
 	player_->MiniDraw();
 	mapchip_->MiniDraw();
 	monitor_->Draw();
+	player_->Draw();
 
 	//debug------------------------------------------------------------------------------------------------------------------
 

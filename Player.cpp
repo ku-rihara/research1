@@ -18,14 +18,16 @@ void Player::Init() {
 	size_ = { 48.0f,48.0f };
 	scale_ = { 1,1 };
 	localVertex_ = MakeLoalVertex(size_);
+	miniLocalVertex_ = localVertex_;
 }
 
 //更新
 void Player::Update() {
 	oldWorldPos_.x = worldPos_.x;
 	oldWorldPos_.y = worldPos_.y;
+	miniLocalVertex_ = localVertex_;
 	Move();
-	ImGui::Begin("Window");
+	ImGui::Begin("Player");
 	ImGui::DragFloat2("PlayerLocal(LeftTop)", &localVertex_.LeftTop.x, 0.1f);
 	ImGui::DragFloat2("PlayerLocal(RightTop)", &localVertex_.RightTop.x, 0.1f);
 	ImGui::DragFloat2("PlayerLocal(LeftBottom)", &localVertex_.LeftBottom.x, 0.1f);
