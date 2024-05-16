@@ -27,8 +27,9 @@ void Camera::MakeBackCamelaMatrix() {
 }
 
 void Camera::Update(const Player& player, const Mapchip& mapchip) {
-	ImGui::Begin("Window");
+	ImGui::Begin("Camera");
 	ImGui::DragFloat2("ScrollPos", &worldPos_.x, 0.1f);
+	ImGui::DragFloat2("PlusZoom", &plusZoomLevel_.x, 0.01f);
 	ImGui::End();
 	BaseCamera::Update(player,mapchip);
 }

@@ -5,7 +5,7 @@
 
 BackGround::BackGround() {
 
-	texture_.Handle = Novice::LoadTexture("./Resources/SkyBackgraund.png");
+	texture_.Handle = Novice::LoadTexture("./Resources/bg.png");
 }
 BackGround::~BackGround() {
 
@@ -37,10 +37,13 @@ void BackGround::Update() {
 	drawEnd_.y = size_.y - drawStart_.y;
 
 	float localLeft = size_.x;
+	
 	if (camera_->GetZoomLevel().x < 1.0f) {
 		localLeft = (size_.x / 2 + ((world.x - size_.x / 2))) * 2;
-		drawStart_.x = (size_.x)-(size_.x - (-(world.x - size_.x / 2)));
-		drawEnd_.x = size_.x - drawStart_.x;
+		drawStart_.x = (size_.x) - (size_.x - (-(world.x - size_.x / 2)));
+		drawEnd_.x = size_.x - drawStart_.x*2;
+		drawStart_.y = (size_.y) - (size_.y - (-(world.y - size_.y / 2)));
+		drawEnd_.y = size_.y - drawStart_.y * 2;
 	}
 
 	// 右端がはみ出ている場合の調整
@@ -84,4 +87,5 @@ void BackGround::Draw() {
 
 void BackGround::MiniDraw() {
 	newDrawQuad(MiniScreenVertex_, drawStart_.x, drawStart_.y, drawEnd_.x, drawEnd_.y, texture_.Handle, WHITE);
+	
 }

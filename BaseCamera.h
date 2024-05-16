@@ -32,6 +32,7 @@ protected:
 	Matrix3x3 viewportMatrix_;
 public:
 	 Vector2 zoomLevel_;
+	 Vector2 plusZoomLevel_;
 
 	virtual void Init();
 	virtual void Update(const Player& player, const Mapchip& mapchip);

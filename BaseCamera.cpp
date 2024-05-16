@@ -77,7 +77,7 @@ void BaseCamera::Update(const Player& player, const Mapchip& mapchip) {
 
 void BaseCamera::MakeCamelaMatrix() {
 
-	worldMatrix_ = MakeAffineMatrix(zoomLevel_, 0, worldPos_);
+	worldMatrix_ = MakeAffineMatrix(zoomLevel_+ plusZoomLevel_, 0, worldPos_);
 	viewMatrix_ = InverseMatrix(worldMatrix_);
 	orthoMatrix_ = MakeOrthographicMatrix(orthoGraphic_.left, orthoGraphic_.top, orthoGraphic_.width, orthoGraphic_.height);
 	viewportMatrix_ = MakeViewwportmatrix(viewprot_.left, viewprot_.top, viewprot_.width, viewprot_.height);
@@ -85,8 +85,8 @@ void BaseCamera::MakeCamelaMatrix() {
 
 void BaseCamera::MakeBackCamelaMatrix() {
 
-	if (zoomLevel_.x <= 1.0f && zoomLevel_.y <= 1.0f) {
-		worldMatrix_ = MakeAffineMatrix(zoomLevel_, 0, backPos_);
+	if (zoomLevel_.x + plusZoomLevel_.x <= 1.0f && zoomLevel_.y + plusZoomLevel_.y <= 1.0f) {
+		worldMatrix_ = MakeAffineMatrix(zoomLevel_+ plusZoomLevel_, 0, backPos_);
 	}
 	else {
 		worldMatrix_ = MakeAffineMatrix(Vector2(1.0f, 1.0f), 0, backPos_);
