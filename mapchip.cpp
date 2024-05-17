@@ -112,10 +112,10 @@ void Mapchip::Update() {
 
 void Mapchip::Draw() {
 	//スクロール座標の取得
-	scrollPos_ = camera_->GetWorldPos();
+	scrollPos_ = miniCamera_->GetWorldPos();
 
-	viewportWidth_ = camera_->GetViewPort().width * camera_->GetZoomLevel().x; // ズームレベルに応じた幅
-	viewportHeight_ = camera_->GetViewPort().height * camera_->GetZoomLevel().y; // ズームレベルに応じた高さ
+	viewportWidth_ = camera_->GetViewPort().width * miniCamera_->GetZoomLevel().x; // ズームレベルに応じた幅
+	viewportHeight_ = camera_->GetViewPort().height *  miniCamera_->GetZoomLevel().y; // ズームレベルに応じた高さ
 
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {
