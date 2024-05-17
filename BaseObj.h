@@ -53,6 +53,8 @@ public:
 	virtual void RenderingPipeline();
 	virtual void MiniRenderingPipeline();
 	virtual void MapChipColligion();
+	virtual void DrawRangeCut(Vector2 scrollpos, float viewportWidth, float viewportHeight);
+	virtual void BackGroundDrawRangeCut(Vector2 centerPos, Vector2 zoomLevel,float viewportWidth, float viewportHeight);
 	
 	Vector2 GetWorldPos()const { return worldPos_; }
 	Vertex GetScreenVertex()const { return screenVertex_; }

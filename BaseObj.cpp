@@ -7,6 +7,7 @@
 //class
 #include "BaseObj.h"
 
+
 BaseObj::BaseObj() {
 	Init();
 };
@@ -41,6 +42,93 @@ void BaseObj::MiniRenderingPipeline() {
 	MiniScreenVertex_ = Transform(miniLocalVertex_, MiniwvpVpMatrix_);
 }
 
+void BaseObj::DrawRangeCut(Vector2 scrollpos, float viewportWidth, float viewportHeight) {
+	Vector2 scrollPos = scrollpos;
+
+	// ビューポート内にあるかどうかの判定
+	bool withinX = (worldPos_.x + size_.x / 2 >= scrollPos.x) && (worldPos_.x - size_.x / 2 <= scrollPos.x + viewportWidth);
+	bool withinY = (worldPos_.y + size_.y / 2 >= scrollPos.y) && (worldPos_.y - size_.y / 2 <= scrollPos.y + viewportHeight);
+
+	if (withinX && withinY) {
+		// 左端がはみ出ている場合の調整
+		drawStart_ = {};
+		drawEnd_ = size_ - drawStart_;
+
+		float localLeft = size_.x;
+		if (worldPos_.x - size_.x / 2 < scrollPos.x) {
+			localLeft = (size_.x / 2 + (-scrollPos.x + (worldPos_.x - size_.x / 2))) * 2;
+			drawStart_.x = (size_.x) - (size_.x - (scrollPos.x - (worldPos_.x - size_.x / 2)));
+			drawEnd_.x = size_.x - drawStart_.x;
+		}
+
+		// 右端がはみ出ている場合の調整
+		float localRight = size_.x;
+		if (worldPos_.x + size_.x / 2 > scrollPos.x + viewportWidth) {
+			localRight = (size_.x / 2 - ((worldPos_.x + size_.x / 2) - (scrollPos.x + viewportWidth))) * 2;
+			drawStart_.x = 0;
+			drawEnd_.x = (size_.x - ((worldPos_.x + size_.x / 2) - (scrollPos.x + viewportWidth)));
+		}
+
+		// 上端がはみ出ている場合の調整
+		float localTop = size_.y;
+		if (worldPos_.y - size_.y / 2 < scrollPos.y) {
+			localTop = (size_.y / 2 + (-scrollPos.y + (worldPos_.y - size_.y / 2))) * 2;
+			drawStart_.y = (size_.y) - (size_.y - (scrollPos.y - (worldPos_.y - size_.y / 2)));
+			drawEnd_.y = size_.y - drawStart_.y;
+		}
+
+		// 下端がはみ出ている場合の調整
+		float localBottom = size_.y;
+		if (worldPos_.y + size_.y / 2 > scrollPos.y + viewportHeight) {
+			localBottom = size_.y - ((worldPos_.y + size_.y / 2) - (scrollPos.y + viewportHeight));
+			drawStart_.y = 0;
+			drawEnd_.y = (size_.y - ((worldPos_.y + size_.y / 2) - (scrollPos.y + viewportHeight)));
+		}
+		miniLocalVertex_ = { Vector2(localLeft, localTop),	Vector2(localRight, localTop),
+						     Vector2(localLeft, localBottom),Vector2(localRight, localBottom),
+		};
+	}
+}
+
+void BaseObj::BackGroundDrawRangeCut(Vector2 centerPos, Vector2 zoomLevel, float viewportWidth, float viewportHeight) {
+	drawStart_.x = 0;
+	drawStart_.y = 0;
+	drawEnd_.x = size_.x - drawStart_.x;
+	drawEnd_.y = size_.y - drawStart_.y;
+
+	float localLeft = size_.x;
+
+	if (zoomLevel.x < 1.0f) {
+		localLeft = (size_.x / 2 + ((centerPos.x - size_.x / 2))) * 2;
+		drawStart_.x = (size_.x) - (size_.x - (-(centerPos.x - size_.x / 2)));
+		drawEnd_.x = size_.x - drawStart_.x * 2;
+	}
+
+	// 右端がはみ出ている場合の調整
+	float localRight = size_.x;
+	if (centerPos.x + size_.x / 2 > viewportWidth) {
+		localRight = (size_.x / 2 - ((centerPos.x + size_.x / 2) - (viewportWidth))) * 2;
+	}
+
+	// 上端がはみ出ている場合の調整
+	float localTop = size_.y;
+	if (zoomLevel.y < 1.0f) {
+		localTop = (size_.y / 2 + ((centerPos.y - size_.y / 2))) * 2;
+		drawStart_.y = (size_.y) - (size_.y - (-(centerPos.y - size_.y / 2)));
+		drawEnd_.y = size_.y - drawStart_.y * 2;
+	}
+
+	// 下端がはみ出ている場合の調整
+	float localBottom = size_.y;
+	if (centerPos.y + size_.y / 2 > viewportHeight) {
+		localBottom = (size_.y / 2 - ((centerPos.y + size_.y / 2) - viewportHeight)) * 2;
+	}
+	miniLocalVertex_ = { Vector2(localLeft, localTop),
+							Vector2(localRight, localTop),
+							 Vector2(localLeft, localBottom),
+							 Vector2(localRight, localBottom),
+	};
+}
 
 void BaseObj::MapChipColligion() {
 	/*maxPos_.x = MAX(worldPos_.x, oldWorldPos_.x);
