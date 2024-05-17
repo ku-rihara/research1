@@ -90,7 +90,7 @@ void BaseObj::DrawRangeCut(Vector2 scrollpos, float viewportWidth, float viewpor
 	}
 }
 
-void BaseObj::BackGroundDrawRangeCut(Vector2 centerPos, Vector2 zoomLevel, float viewportWidth, float viewportHeight) {
+void BaseObj::BackGroundDrawRangeCut(Vector2 centerPos, float viewportWidth, float viewportHeight) {
 	drawStart_.x = 0;
 	drawStart_.y = 0;
 	drawEnd_.x = size_.x - drawStart_.x;
@@ -98,7 +98,7 @@ void BaseObj::BackGroundDrawRangeCut(Vector2 centerPos, Vector2 zoomLevel, float
 
 	float localLeft = size_.x;
 
-	if (zoomLevel.x < 1.0f) {
+	if (miniCamera_->GetZoomLevel().x < 1.0f) {
 		localLeft = (size_.x / 2 + ((centerPos.x - size_.x / 2))) * 2;
 		drawStart_.x = (size_.x) - (size_.x - (-(centerPos.x - size_.x / 2)));
 		drawEnd_.x = size_.x - drawStart_.x * 2;
@@ -112,7 +112,7 @@ void BaseObj::BackGroundDrawRangeCut(Vector2 centerPos, Vector2 zoomLevel, float
 
 	// 上端がはみ出ている場合の調整
 	float localTop = size_.y;
-	if (zoomLevel.y < 1.0f) {
+	if (miniCamera_->GetZoomLevel().y < 1.0f) {
 		localTop = (size_.y / 2 + ((centerPos.y - size_.y / 2))) * 2;
 		drawStart_.y = (size_.y) - (size_.y - (-(centerPos.y - size_.y / 2)));
 		drawEnd_.y = size_.y - drawStart_.y * 2;

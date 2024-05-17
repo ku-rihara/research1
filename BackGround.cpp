@@ -25,7 +25,7 @@ void BackGround::Update() {
 
 	Vector2 world{ (worldPos_.x + (size_.x / 2.0f)) * camera_->GetZoomLevel().x
 				  ,(worldPos_.y + (size_.y / 2.0f)) * camera_->GetZoomLevel().y };
-	BackGroundDrawRangeCut(world, miniCamera_->GetZoomLevel(), camera_->GetViewPort().width * camera_->GetZoomLevel().x, camera_->GetViewPort().height * camera_->GetZoomLevel().y);
+	BackGroundDrawRangeCut(world, camera_->GetViewPort().width * camera_->GetZoomLevel().x, camera_->GetViewPort().height * camera_->GetZoomLevel().y);
 }
 
 void BackGround::Draw() {
@@ -47,6 +47,6 @@ void BackGround::MiniRenderingPipeline() {
 	BaseObj::MiniRenderingPipeline();
 }
 
-void BackGround::BackGroundDrawRangeCut(Vector2 centerPos, Vector2 zoomLevel,float viewportWidth, float viewportHeight) {
-	BaseObj::BackGroundDrawRangeCut(centerPos, zoomLevel,viewportWidth,viewportHeight);
+void BackGround::BackGroundDrawRangeCut(Vector2 centerPos,float viewportWidth, float viewportHeight) {
+	BaseObj::BackGroundDrawRangeCut(centerPos,viewportWidth,viewportHeight);
 }

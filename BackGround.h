@@ -17,6 +17,6 @@ public:
 	void MiniDraw();
 	void RenderingPipeline()override;
 	void MiniRenderingPipeline()override;
-    void BackGroundDrawRangeCut(Vector2 centerPos, Vector2 zoomLevel, float viewportWidth, float viewportHeight)override;
+    void BackGroundDrawRangeCut(Vector2 centerPos, float viewportWidth, float viewportHeight)override;
 };
 
