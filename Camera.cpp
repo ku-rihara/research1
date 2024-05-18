@@ -18,8 +18,8 @@ void Camera::Init() {
 	BaseCamera::Init();
 
 }
-void Camera::MakeCamelaMatrix() {
-	BaseCamera::MakeCamelaMatrix();
+void Camera::MakeCamelaMatrix(bool isZoomRock) {
+	BaseCamera::MakeCamelaMatrix(isZoomRock);
 }
 
 void Camera::MakeBackCamelaMatrix() {

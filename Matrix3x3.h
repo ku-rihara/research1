@@ -2,6 +2,8 @@
 
 #include"struct.h"
 
+Matrix3x3 MakeIdentity3x3();
+
 Matrix3x3 Multiply(Matrix3x3 matrix1, Matrix3x3 matrix2);
 
 Vertex Transform(Vertex VerTexWide, Matrix3x3 matrix);

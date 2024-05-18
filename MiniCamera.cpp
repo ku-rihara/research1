@@ -31,8 +31,8 @@ void MiniCamera::Update(const Player& player, const Mapchip& mapchip) {
 	
 
 }
-void MiniCamera::MakeCamelaMatrix() {
-	BaseCamera::MakeCamelaMatrix();
+void MiniCamera::MakeCamelaMatrix(bool isZoomRock) {
+	BaseCamera::MakeCamelaMatrix(isZoomRock);
 	}
 
 void MiniCamera::MakeBackCamelaMatrix() {

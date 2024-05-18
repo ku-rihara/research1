@@ -153,7 +153,7 @@ void Mapchip::RenderingPipeline() {
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {
 			//マップチップ行列の作成
-			camera_->MakeCamelaMatrix();
+			camera_->MakeCamelaMatrix(false);
 			matrix_[y][x] = MakeAffineMatrix(scale_, 0, worldPos_[y][x]);
 			wvMatrix_[y][x] = wvpVpMatrix(matrix_[y][x], camera_->GetViewMatrix(), camera_->GetOrthoMatrix(), camera_->GetViewportMatrix());
 			//スクリーンに変換＆描画
@@ -166,7 +166,7 @@ void Mapchip::MiniRenderingPipeline() {
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {
 			//マップチップ行列の作成
-			miniCamera_->MakeCamelaMatrix();
+			miniCamera_->MakeCamelaMatrix(false);
 			miniMatrix_[y][x] = MakeAffineMatrix(scale_, 0, worldPos_[y][x]);
 			miniwvMatrix_[y][x] = wvpVpMatrix(miniMatrix_[y][x], miniCamera_->GetViewMatrix(), miniCamera_->GetOrthoMatrix(), miniCamera_->GetViewportMatrix());
 			//スクリーンに変換＆描画

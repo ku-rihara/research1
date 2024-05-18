@@ -36,7 +36,7 @@ public:
 
 	virtual void Init();
 	virtual void Update(const Player& player, const Mapchip& mapchip);
-	virtual void MakeCamelaMatrix();
+	virtual void MakeCamelaMatrix(bool isZoomRock);
 	virtual void MakeBackCamelaMatrix();
 	/*void ZoomOut();
 	void ZoomIn();*/

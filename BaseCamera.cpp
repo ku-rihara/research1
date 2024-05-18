@@ -75,12 +75,19 @@ void BaseCamera::Update(const Player& player, const Mapchip& mapchip) {
 	}
 }
 
-void BaseCamera::MakeCamelaMatrix() {
-
-	worldMatrix_ = MakeAffineMatrix(zoomLevel_+ plusZoomLevel_, 0, worldPos_);
-	viewMatrix_ = InverseMatrix(worldMatrix_);
-	orthoMatrix_ = MakeOrthographicMatrix(orthoGraphic_.left, orthoGraphic_.top, orthoGraphic_.width, orthoGraphic_.height);
-	viewportMatrix_ = MakeViewwportmatrix(viewprot_.left, viewprot_.top, viewprot_.width, viewprot_.height);
+void BaseCamera::MakeCamelaMatrix(bool isZoomRock) {
+	if(isZoomRock){
+		worldMatrix_ = MakeAffineMatrix({1,1}, 0, worldPos_);
+		viewMatrix_ = InverseMatrix(worldMatrix_);
+		orthoMatrix_ = MakeOrthographicMatrix(orthoGraphic_.left, orthoGraphic_.top, orthoGraphic_.width, orthoGraphic_.height);
+		viewportMatrix_ = MakeViewwportmatrix(viewprot_.left, viewprot_.top, viewprot_.width, viewprot_.height);
+	}
+	else {
+		worldMatrix_ = MakeAffineMatrix(zoomLevel_ + plusZoomLevel_, 0, worldPos_);
+		viewMatrix_ = InverseMatrix(worldMatrix_);
+		orthoMatrix_ = MakeOrthographicMatrix(orthoGraphic_.left, orthoGraphic_.top, orthoGraphic_.width, orthoGraphic_.height);
+		viewportMatrix_ = MakeViewwportmatrix(viewprot_.left, viewprot_.top, viewprot_.width, viewprot_.height);
+	}
 }
 
 void BaseCamera::MakeBackCamelaMatrix() {

@@ -3,6 +3,8 @@
 
 class Monitor:public BaseObj{
 private:
+	bool isRockScreen_;
+	Vector2 movePos_;
 	Vector2 mapTransformedSize_;
 	Vector2 drawSize_;
 	GH texture_;
