@@ -41,7 +41,11 @@ void Player::Draw() {
 }
 
 void Player::MiniDraw() {
-	newDrawQuad(MiniScreenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, RED);
+	bool withinX = (worldPos_.x + size_.x / 2 >= miniCamera_->GetWorldPos().x) && (worldPos_.x - size_.x / 2 <= miniCamera_->GetWorldPos().x + (camera_->GetViewPort().width * miniCamera_->GetZoomLevel().x));
+	bool withinY = (worldPos_.y + size_.y / 2 >= miniCamera_->GetWorldPos().y) && (worldPos_.y - size_.y / 2 <= miniCamera_->GetWorldPos().y + (camera_->GetViewPort().height * miniCamera_->GetZoomLevel().y));
+	if (withinX && withinY) {
+		newDrawQuad(MiniScreenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, RED);
+	}
 }
 
 void Player::Move() {
