@@ -4,8 +4,11 @@
 class Player:public BaseObj{
 private:
 	
-	DIRECTION direction_;
+
 	GH texture_;
+	GH directionRight_;
+	GH directionLeft_;
+	DIRECTION direction_;
 public:
 	Player();//コンストラクタ
 	~Player();//デストラクタ
