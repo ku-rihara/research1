@@ -35,7 +35,7 @@ public:
 	 Vector2 plusZoomLevel_;
 
 	virtual void Init();
-	virtual void Update(const Player& player, const Mapchip& mapchip);
+	virtual void Update(const Player& player, const Mapchip& mapchip,Vector2 startPos);
 	virtual void MakeCamelaMatrix(bool isZoomRock);
 	virtual void MakeBackCamelaMatrix();
 	/*void ZoomOut();

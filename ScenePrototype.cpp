@@ -34,8 +34,8 @@ void ScenePrototype::Init() {
 }
 
 void ScenePrototype::Update() {
-	camera_->Update(*player_, *mapchip_);//カメラの更新
-	miniCamera_->Update(*player_, *mapchip_);
+	camera_->Update(*player_, *mapchip_, { 48 * 18,0 });//カメラの更新
+	miniCamera_->Update(*player_, *mapchip_, { 0,0 });
 	miniCamera_->CombineMonitor(*monitor_);
 	backGround_->Update();
 	monitor_->Update();

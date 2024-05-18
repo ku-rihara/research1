@@ -23,11 +23,11 @@ void MiniCamera::Init() {
 	backOrthoGraphic_ = { -640, -360, 640, 360 };
 }
 
-void MiniCamera::Update(const Player& player, const Mapchip& mapchip) {
+void MiniCamera::Update(const Player& player, const Mapchip& mapchip, Vector2 startPos) {
 	ImGui::Begin("Camera");
 	ImGui::DragFloat2("MiniPlusZoom", &plusZoomLevel_.x, 0.01f);
 	ImGui::End();
-	BaseCamera::Update( player,mapchip);
+	BaseCamera::Update( player,mapchip, startPos);
 	
 
 }

@@ -19,8 +19,7 @@ void BaseCamera::Init() {
 	backOrthoGraphic_ = { -640, -360, 640, 360 };
 }
 
-void BaseCamera::Update(const Player& player, const Mapchip& mapchip) {
-
+void BaseCamera::Update(const Player& player, const Mapchip& mapchip, Vector2 startPos) {
 
 	//ズームイン
 	if (InputManager::GetIsPressKey(DIK_UP)) {
@@ -36,26 +35,26 @@ void BaseCamera::Update(const Player& player, const Mapchip& mapchip) {
 			zoomLevel_.y = zoomOutMax;
 		}
 	}
-
+	
 	//スクロール範囲の制限
-	const float LeftMost = 248.0f *zoomLevel_.x;
-	const float RightMost = (mapchip.GetMapchipSize()) * (mapxMax - 16.5f * zoomLevel_.x) - (LeftMost);
+	const float LeftMost = (startPos.x)+ 248.0f *zoomLevel_.x;
+	const float RightMost = ((mapchip.GetMapchipSize()) * (mapxMax - 16.5f * zoomLevel_.x) - (LeftMost))+ (startPos.x);
 	const float TopMost = 240.0f * zoomLevel_.y;
 	const float BottomMost = (mapchip.GetMapchipSize()) * (mapyMax - 5 * zoomLevel_.y) - (TopMost);
 
 	//カメラの動き
 	//X
 	if (player.GetWorldPos().x >= LeftMost && player.GetWorldPos().x <= RightMost) {
-	worldPos_.x= player.GetWorldPos().x - LeftMost;
+	worldPos_.x= (startPos.x)+ player.GetWorldPos().x - LeftMost;
 	}
 	//スクロール範囲外はスクロールしない
 	else {
 		if (player.GetWorldPos().x <= LeftMost/* || zoomLevel_.x >= zoomOutMax*/) {
-			worldPos_.x=0;
+			worldPos_.x= (startPos.x);
 		}
 
 		if (player.GetWorldPos().x >= RightMost/* && zoomLevel_.x < zoomOutMax*/) {
-			worldPos_.x=RightMost - LeftMost;
+			worldPos_.x=(RightMost - LeftMost)+ (startPos.x);
 		}
 	}
 

@@ -25,6 +25,7 @@ private:
 	MiniCamera* miniCamera_;
 	//pos
 	Vector2 scrollPos_;
+	Vector2 MiniScrollPos_;
 	Vector2 worldPos_[mapyMax][mapxMax];
 	Vector2 scale_;
 	//Matrix&Vertex
@@ -67,10 +68,10 @@ public:
 	//setter
 	void SetCamera(Camera* camera) { camera_ = camera; }
 	void SetMiniCamera(MiniCamera* mcamera) { miniCamera_ = mcamera; }
-	void SetScrollPosX(float scrollPosX) { this->scrollPos_.x = scrollPosX; }
+	void SetScrollPosX(float scrollPosX) { this->MiniScrollPos_.x = scrollPosX; }
 
 	//getter
-	Vector2 GetScrollPos() const { return scrollPos_; }
+	Vector2 GetScrollPos() const { return MiniScrollPos_; }
 	Vertex GetScreenVertex(int y, int x)const { return ScreenVertex_[y][x]; }
 	Vector2 GetScreenCenter(int y, int x)const { return Vector2(ScreenVertex_[y][x].LeftTop.x + size_ / 2, ScreenVertex_[y][x].LeftTop.y + size_ / 2); }
 	Vector2 GetPos(int y, int x)const { return worldPos_[y][x]; }

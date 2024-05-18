@@ -18,6 +18,7 @@ public:
 	void Move();
 	void RenderingPipeline()override;
 	void MiniRenderingPipeline()override;
+	void DrawRangeCut(Vector2 scrollpos, float viewportWidth, float viewportHeight)override;
 	void MapChipColligion()override;
 
 };

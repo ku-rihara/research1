@@ -14,7 +14,7 @@ Player::~Player() {
 
 void Player::Init() {
 	BaseObj::Init();
-	worldPos_ = { 48 * 2,48 * 2 };
+	worldPos_ = { 48 * 20,48 * 5 };
 	size_ = { 48.0f,48.0f };
 	scale_ = { 1,1 };
 	localVertex_ = MakeLoalVertex(size_);
@@ -23,16 +23,19 @@ void Player::Init() {
 
 //更新
 void Player::Update() {
-	oldWorldPos_.x = worldPos_.x;
-	oldWorldPos_.y = worldPos_.y;
-	miniLocalVertex_ = localVertex_;
-	Move();
 	ImGui::Begin("Player");
+	ImGui::DragFloat2("PlayerWorldPos", &worldPos_.x, 1.0f);
 	ImGui::DragFloat2("PlayerLocal(LeftTop)", &localVertex_.LeftTop.x, 0.1f);
 	ImGui::DragFloat2("PlayerLocal(RightTop)", &localVertex_.RightTop.x, 0.1f);
 	ImGui::DragFloat2("PlayerLocal(LeftBottom)", &localVertex_.LeftBottom.x, 0.1f);
 	ImGui::DragFloat2("PlayerLocal(RightBottom)", &localVertex_.RightBottom.x, 0.1f);
 	ImGui::End();
+	oldWorldPos_.x = worldPos_.x;
+	oldWorldPos_.y = worldPos_.y;
+	DrawRangeCut(miniCamera_->GetWorldPos(), camera_->GetViewPort().width * camera_->GetZoomLevel().x, camera_->GetViewPort().height * camera_->GetZoomLevel().y);
+
+	Move();
+
 }
 
 //描画
@@ -41,7 +44,7 @@ void Player::Draw() {
 }
 
 void Player::MiniDraw() {
-	newDrawQuad(MiniScreenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, RED);
+	newDrawQuad(MiniScreenVertex_, drawStart_.x, drawStart_.y, drawEnd_.x, drawEnd_.y, texture_.Handle, RED);
 }
 
 void Player::Move() {
@@ -85,4 +88,9 @@ void Player::MiniRenderingPipeline() {
 //マップチップとの当たり判定
 void Player::MapChipColligion() {
 	BaseObj::MapChipColligion();
+}
+
+void Player::DrawRangeCut(Vector2 scrollpos, float viewportWidth, float viewportHeight) {
+
+	BaseObj::DrawRangeCut(scrollpos,viewportWidth,viewportHeight);
 }
