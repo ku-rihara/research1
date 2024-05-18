@@ -54,8 +54,8 @@ void Mapchip::Update() {
 			worldPos_[y][x].y = float(y * size_) + (size_ / 2);
 
 			// ビューポート内にあるかどうかの判定
-			bool withinX = (worldPos_[y][x].x + size_ / 2 >= MiniScrollPos_.x) && (worldPos_[y][x].x - size_ / 2 <= MiniScrollPos_.x + viewportWidth_);
-			bool withinY = (worldPos_[y][x].y + size_ / 2 >= MiniScrollPos_.y) && (worldPos_[y][x].y - size_ / 2 <= MiniScrollPos_.y + viewportHeight_);
+			bool withinX = (worldPos_[y][x].x + size_ / 2 >= MiniScrollPos_.x) && (worldPos_[y][x].x - size_ / 2 <= MiniScrollPos_.x + miniViewportWidth_);
+			bool withinY = (worldPos_[y][x].y + size_ / 2 >= MiniScrollPos_.y) && (worldPos_[y][x].y - size_ / 2 <= MiniScrollPos_.y + miniViewportHeight_);
 
 			if (withinX && withinY && map[y][x] == BLOCK) {
 				// 左端がはみ出ている場合の調整
@@ -73,10 +73,10 @@ void Mapchip::Update() {
 
 				// 右端がはみ出ている場合の調整
 				float localRight = size_;
-				if (worldPos_[y][x].x + size_ / 2 > MiniScrollPos_.x + viewportWidth_) {
-					localRight = (size_ / 2 - ((worldPos_[y][x].x + size_ / 2) - (MiniScrollPos_.x + viewportWidth_)))*2;
+				if (worldPos_[y][x].x + size_ / 2 > MiniScrollPos_.x + miniViewportWidth_) {
+					localRight = (size_ / 2 - ((worldPos_[y][x].x + size_ / 2) - (MiniScrollPos_.x + miniViewportWidth_)))*2;
 					drawStart_[y][x].x = 0;
-					drawEnd_[y][x].x =(size_- ((worldPos_[y][x].x + size_ / 2) - (MiniScrollPos_.x + viewportWidth_)));
+					drawEnd_[y][x].x =(size_- ((worldPos_[y][x].x + size_ / 2) - (MiniScrollPos_.x + miniViewportWidth_)));
 				}
 
 				// 上端がはみ出ている場合の調整
@@ -89,10 +89,10 @@ void Mapchip::Update() {
 
 				// 下端がはみ出ている場合の調整
 				float localBottom = size_;
-				if (worldPos_[y][x].y + size_ / 2 > MiniScrollPos_.y + viewportHeight_) {
-					localBottom = size_ - ((worldPos_[y][x].y + size_ / 2) - (MiniScrollPos_.y + viewportHeight_));
+				if (worldPos_[y][x].y + size_ / 2 > MiniScrollPos_.y + miniViewportHeight_) {
+					localBottom = (size_ / 2 - ((worldPos_[y][x].y + size_ / 2) - (MiniScrollPos_.y + miniViewportHeight_))) * 2;
 					drawStart_[y][x].y = 0;
-					drawEnd_[y][x].y = (size_ - ((worldPos_[y][x].y + size_ / 2) - (MiniScrollPos_.y + viewportHeight_)));
+					drawEnd_[y][x].y = (size_ - ((worldPos_[y][x].y + size_ / 2) - (MiniScrollPos_.y + miniViewportHeight_)));
 				}
 				miniLoaclVertex[y][x] = { Vector2(localLeft, localTop),	Vector2(localRight, localTop),
 										  Vector2(localLeft, localBottom),Vector2(localRight, localBottom),
@@ -105,6 +105,8 @@ void Mapchip::Update() {
 
 void Mapchip::Draw() {
 	scrollPos_ = camera_->GetWorldPos();
+	viewportWidth_ = camera_->GetViewPort().width * camera_->GetZoomLevel().x; // ズームレベルに応じた幅
+	viewportHeight_ = camera_->GetViewPort().height * camera_->GetZoomLevel().y; // ズームレベルに応じた高さ
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {
 			bool withinX = (worldPos_[y][x].x + size_ / 2 >= scrollPos_.x) && (worldPos_[y][x].x - size_ / 2 <= scrollPos_.x + viewportWidth_);
@@ -124,13 +126,13 @@ void Mapchip::MiniDraw() {
 
 	//スクロール座標の取得
 	MiniScrollPos_ = miniCamera_->GetWorldPos();
-	viewportWidth_ = camera_->GetViewPort().width * miniCamera_->GetZoomLevel().x; // ズームレベルに応じた幅
-	viewportHeight_ = camera_->GetViewPort().height * miniCamera_->GetZoomLevel().y; // ズームレベルに応じた高さ
+	miniViewportWidth_ = camera_->GetViewPort().width * miniCamera_->GetZoomLevel().x; // ズームレベルに応じた幅
+	miniViewportHeight_ = camera_->GetViewPort().height * miniCamera_->GetZoomLevel().y; // ズームレベルに応じた高さ
 
 	for (int y = 0; y < mapyMax; y++) {
 		for (int x = 0; x < mapxMax; x++) {
-			bool withinX = (worldPos_[y][x].x + size_ / 2 >= MiniScrollPos_.x) && (worldPos_[y][x].x - size_ / 2 <= MiniScrollPos_.x + viewportWidth_);
-			bool withinY = (worldPos_[y][x].y + size_ / 2 >= MiniScrollPos_.y) && (worldPos_[y][x].y - size_ / 2 <= MiniScrollPos_.y + viewportHeight_);
+			bool withinX = (worldPos_[y][x].x + size_ / 2 >= MiniScrollPos_.x) && (worldPos_[y][x].x - size_ / 2 <= MiniScrollPos_.x + miniViewportWidth_);
+			bool withinY = (worldPos_[y][x].y + size_ / 2 >= MiniScrollPos_.y) && (worldPos_[y][x].y - size_ / 2 <= MiniScrollPos_.y + miniViewportHeight_);
 
 			//// 切り抜いた範囲が有効なら描画する
 			if (withinX && withinY &&  map[y][x] == BLOCK) {

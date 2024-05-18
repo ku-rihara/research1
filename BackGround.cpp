@@ -23,9 +23,9 @@ void BackGround::Init() {
 
 void BackGround::Update() {
 
-	Vector2 world{ (worldPos_.x + (size_.x / 2.0f)) * camera_->GetZoomLevel().x
-				  ,(worldPos_.y + (size_.y / 2.0f)) * camera_->GetZoomLevel().y };
-	BackGroundDrawRangeCut(world, camera_->GetViewPort().width * camera_->GetZoomLevel().x, camera_->GetViewPort().height * camera_->GetZoomLevel().y);
+	Vector2 world{ (worldPos_.x + (size_.x / 2.0f)) * miniCamera_->GetZoomLevel().x
+				  ,(worldPos_.y + (size_.y / 2.0f)) * miniCamera_->GetZoomLevel().y };
+	BackGroundDrawRangeCut(world, camera_->GetViewPort().width * miniCamera_->GetZoomLevel().x, camera_->GetViewPort().height * miniCamera_->GetZoomLevel().y);
 }
 
 void BackGround::Draw() {

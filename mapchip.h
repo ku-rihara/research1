@@ -45,6 +45,8 @@ private:
 	//ビューポートの値
 	float viewportWidth_;
 	float viewportHeight_;
+	float miniViewportWidth_;
+	float miniViewportHeight_;
 	//size,texture
 	float size_;
 	float miniSize_;

@@ -34,6 +34,7 @@ void ScenePrototype::Init() {
 }
 
 void ScenePrototype::Update() {
+	miniCamera_->zoomLevel_ = { 0.5f,0.5f };
 	camera_->Update(*player_, *mapchip_, { 48 * 18,0 });//カメラの更新
 	miniCamera_->Update(*player_, *mapchip_, { 0,0 });
 	miniCamera_->CombineMonitor(*monitor_);
