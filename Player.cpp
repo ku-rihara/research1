@@ -14,7 +14,7 @@ Player::~Player() {
 
 void Player::Init() {
 	BaseObj::Init();
-	worldPos_ = { 48 * 20,48 * 5 };
+	worldPos_ = { 48 * 26,48 * 5 };
 	size_ = { 48.0f,48.0f };
 	scale_ = { 1,1 };
 	localVertex_ = MakeLoalVertex(size_);
@@ -32,9 +32,8 @@ void Player::Update() {
 	ImGui::End();
 	oldWorldPos_.x = worldPos_.x;
 	oldWorldPos_.y = worldPos_.y;
-	DrawRangeCut(miniCamera_->GetWorldPos(), camera_->GetViewPort().width * camera_->GetZoomLevel().x, camera_->GetViewPort().height * camera_->GetZoomLevel().y);
-
 	Move();
+	DrawRangeCut(miniCamera_->GetWorldPos(), camera_->GetViewPort().width * miniCamera_->GetZoomLevel().x, camera_->GetViewPort().height * miniCamera_->GetZoomLevel().y);
 
 }
 
@@ -44,7 +43,11 @@ void Player::Draw() {
 }
 
 void Player::MiniDraw() {
-	newDrawQuad(MiniScreenVertex_, drawStart_.x, drawStart_.y, drawEnd_.x, drawEnd_.y, texture_.Handle, RED);
+	bool withinX = (worldPos_.x + size_.x / 2 >= miniCamera_->GetWorldPos().x) && (worldPos_.x - size_.x / 2 <= miniCamera_->GetWorldPos().x +(camera_->GetViewPort().width * miniCamera_->GetZoomLevel().x));
+	bool withinY = (worldPos_.y + size_.y / 2 >= miniCamera_->GetWorldPos().y) && (worldPos_.y - size_.y / 2 <= miniCamera_->GetWorldPos().y +(camera_->GetViewPort().height * miniCamera_->GetZoomLevel().y));
+	if (withinX && withinY) {
+		newDrawQuad(MiniScreenVertex_, drawStart_.x, drawStart_.y, drawEnd_.x, drawEnd_.y, texture_.Handle, RED);
+	}
 }
 
 void Player::Move() {

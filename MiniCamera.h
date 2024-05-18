@@ -12,7 +12,7 @@ public:
 	MiniCamera();
 	~MiniCamera();
 	 void Init()override;
-	 void Update(const Player& player, const Mapchip& mapchip, Vector2 startPos)override;
+	 void Update(const Player& player, const Mapchip& mapchip, Vector2 startPos, Vector2 endPos)override;
 	 void MakeCamelaMatrix(bool isZoomRock)override;
 	 void MakeBackCamelaMatrix()override;
 	 void CombineMonitor(const Monitor&moniyor);

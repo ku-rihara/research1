@@ -19,8 +19,8 @@ void BaseCamera::Init() {
 	backOrthoGraphic_ = { -640, -360, 640, 360 };
 }
 
-void BaseCamera::Update(const Player& player, const Mapchip& mapchip, Vector2 startPos) {
-
+void BaseCamera::Update(const Player& player, const Mapchip& mapchip, Vector2 startPos, Vector2 endPos) {
+	float RightMost{};
 	//ズームイン
 	if (InputManager::GetIsPressKey(DIK_UP)) {
 		zoomLevel_ -= 0.01f;
@@ -35,13 +35,17 @@ void BaseCamera::Update(const Player& player, const Mapchip& mapchip, Vector2 st
 			zoomLevel_.y = zoomOutMax;
 		}
 	}
+		//スクロール範囲の制限
+		const float LeftMost = (startPos.x)+248.0f  * zoomLevel_.x;
+		if (endPos.x == 0.0f) {
+			  RightMost = ((mapchip.GetMapchipSize()) * (mapxMax - 16.5f * zoomLevel_.x) - (LeftMost)) + (startPos.x);
+		}
+		else if (endPos.x != 0.0f) {
+			RightMost = endPos.x;
+		}
+		const float TopMost = 240.0f * zoomLevel_.y;
+		const float BottomMost = (mapchip.GetMapchipSize()) * (mapyMax - 5 * zoomLevel_.y) - (TopMost);
 	
-	//スクロール範囲の制限
-	const float LeftMost = (startPos.x)+ 248.0f *zoomLevel_.x;
-	const float RightMost = ((mapchip.GetMapchipSize()) * (mapxMax - 16.5f * zoomLevel_.x) - (LeftMost))+ (startPos.x);
-	const float TopMost = 240.0f * zoomLevel_.y;
-	const float BottomMost = (mapchip.GetMapchipSize()) * (mapyMax - 5 * zoomLevel_.y) - (TopMost);
-
 	//カメラの動き
 	//X
 	if (player.GetWorldPos().x >= LeftMost && player.GetWorldPos().x <= RightMost) {
