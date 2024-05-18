@@ -97,7 +97,7 @@ void Mapchip::Update() {
 				// 下端がはみ出ている場合の調整
 				float localBottom = size_;
 				if (worldPos_[y][x].y + size_ / 2 > scrollPos_.y + viewportHeight_) {
-					localBottom = size_ - ((worldPos_[y][x].y + size_ / 2) - (scrollPos_.y + viewportHeight_));
+					localBottom = (size_ / 2 - ((worldPos_[y][x].y + size_ / 2) - (scrollPos_.y + viewportHeight_))) * 2;
 					drawStart_[y][x].y = 0;
 					drawEnd_[y][x].y = (size_ - ((worldPos_[y][x].y + size_ / 2) - (scrollPos_.y + viewportHeight_)));
 				}

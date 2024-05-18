@@ -80,7 +80,7 @@ void BaseObj::DrawRangeCut(Vector2 scrollpos, float viewportWidth, float viewpor
 		// 下端がはみ出ている場合の調整
 		float localBottom = size_.y;
 		if (worldPos_.y + size_.y / 2 > scrollPos.y + viewportHeight) {
-			localBottom = size_.y - ((worldPos_.y + size_.y / 2) - (scrollPos.y + viewportHeight));
+			localBottom = (size_.y / 2 - ((worldPos_.y + size_.y / 2) - (scrollPos.y + viewportHeight))) * 2;
 			drawStart_.y = 0;
 			drawEnd_.y = (size_.y - ((worldPos_.y + size_.y / 2) - (scrollPos.y + viewportHeight)));
 		}
