@@ -19,7 +19,7 @@ void Monitor::Init() {
 	BaseObj::Init();
 	worldPos_ = { 1200,1000 };
 	size_ = { 48.0f * 13,48.0f * 7 };
-	/*drawSize_ = { (48.0f * 5)+11,(48.0f * 3)+11 };*/
+	movePos_ = { 500,300 };
 	scale_ = { 1,1 };
 	localVertex_ = MakeLoalVertex(size_);
 }
