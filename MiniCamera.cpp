@@ -5,7 +5,9 @@
 #include"BoxRelated.h"
 //class
 #include"Monitor.h"
+#ifdef  _DEBUG
 #include<imgui.h>
+#endif
 
 MiniCamera::MiniCamera() {
 
@@ -24,9 +26,11 @@ void MiniCamera::Init() {
 }
 
 void MiniCamera::Update(const Player& player, const Mapchip& mapchip) {
+#ifdef  _DEBUG
 	ImGui::Begin("Camera");
 	ImGui::DragFloat2("MiniPlusZoom", &plusZoomLevel_.x, 0.01f);
 	ImGui::End();
+#endif
 	BaseCamera::Update( player,mapchip);
 	
 

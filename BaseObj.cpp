@@ -53,39 +53,68 @@ void BaseObj::DrawRangeCut(Vector2 scrollpos, float viewportWidth, float viewpor
 		// 左端がはみ出ている場合の調整
 		drawStart_ = {};
 		drawEnd_ = size_ - drawStart_;
+		Vertex plusLocalVertex = { {localVertex_.LeftTop.x - size_.x,localVertex_.LeftTop.y - size_.y},
+								   {localVertex_.RightTop.x - size_.x,localVertex_.RightTop.y - size_.y} ,
+								   {localVertex_.LeftBottom.x - size_.x,localVertex_.LeftBottom.y - size_.y} ,
+								   {localVertex_.RightBottom.x - size_.x,localVertex_.RightBottom.y - size_.y}
+		};
 
-		float localLeft = size_.x;
-		if (worldPos_.x - size_.x / 2 < scrollPos.x) {
-			localLeft = (size_.x / 2 + (-scrollPos.x + (worldPos_.x - size_.x / 2))) * 2;
+		float localLeftT = size_.x + plusLocalVertex.LeftTop.x;
+		float localLeftB = size_.x + plusLocalVertex.LeftBottom.x;
+		if (worldPos_.x - localVertex_.LeftTop.x / 2 < scrollPos.x) {
+			localLeftT = (localVertex_.LeftTop.x / 2 + (-scrollPos.x + (worldPos_.x - localVertex_.LeftTop.x / 2))) * 2;
+		}
+		if (worldPos_.x - localVertex_.LeftBottom.x / 2 < scrollPos.x) {
+			localLeftB = (localVertex_.LeftBottom.x / 2 + (-scrollPos.x + (worldPos_.x - localVertex_.LeftBottom.x / 2))) * 2;
+		}
+		if (worldPos_.x - localVertex_.LeftTop.x / 2 < scrollPos.x || worldPos_.x - localVertex_.LeftBottom.x / 2 < scrollPos.x) {
 			drawStart_.x = (size_.x) - (size_.x - (scrollPos.x - (worldPos_.x - size_.x / 2)));
 			drawEnd_.x = size_.x - drawStart_.x;
 		}
 
 		// 右端がはみ出ている場合の調整
-		float localRight = size_.x;
-		if (worldPos_.x + size_.x / 2 > scrollPos.x + viewportWidth) {
-			localRight = (size_.x / 2 - ((worldPos_.x + size_.x / 2) - (scrollPos.x + viewportWidth))) * 2;
+		float localRightT = size_.x + plusLocalVertex.RightTop.x;
+		float localRightB = size_.x + plusLocalVertex.RightBottom.x;
+		if (worldPos_.x + localVertex_.RightTop.x / 2 > scrollPos.x + viewportWidth) {
+			localRightT = (localVertex_.RightTop.x / 2 - ((worldPos_.x + localVertex_.RightTop.x / 2) - (scrollPos.x + viewportWidth))) * 2;
+		}
+		if (worldPos_.x + localVertex_.RightBottom.x / 2 > scrollPos.x + viewportWidth) {
+			localRightB = (localVertex_.RightBottom.x / 2 - ((worldPos_.x + localVertex_.RightBottom.x / 2) - (scrollPos.x + viewportWidth))) * 2;
+		}
+		if (worldPos_.x + localVertex_.RightBottom.x / 2 > scrollPos.x + viewportWidth || worldPos_.x + localVertex_.RightTop.x / 2 > scrollPos.x + viewportWidth) {
 			drawStart_.x = 0;
 			drawEnd_.x = (size_.x - ((worldPos_.x + size_.x / 2) - (scrollPos.x + viewportWidth)));
 		}
-
-		// 上端がはみ出ている場合の調整
-		float localTop = size_.y;
-		if (worldPos_.y - size_.y / 2 < scrollPos.y) {
-			localTop = (size_.y / 2 + (-scrollPos.y + (worldPos_.y - size_.y / 2))) * 2;
+		//上端ははみ出ている場合の調整
+		float localTopL = size_.y + plusLocalVertex.LeftTop.y;
+		float localTopR = size_.y + plusLocalVertex.RightTop.y;
+		if (worldPos_.y - localVertex_.LeftTop.y / 2 < scrollPos.y) {
+			localTopL = (localVertex_.LeftTop.y / 2 + (-scrollPos.y + (worldPos_.y - localVertex_.LeftTop.y / 2))) * 2;
+		}
+		if (worldPos_.y - localVertex_.RightTop.y / 2 < scrollPos.y) {
+			localTopR = (localVertex_.RightTop.y / 2 + (-scrollPos.y + (worldPos_.y - localVertex_.RightTop.y / 2))) * 2;
+		}
+		if (worldPos_.y - localVertex_.LeftTop.y / 2 < scrollPos.y || worldPos_.y - localVertex_.RightTop.y / 2 < scrollPos.y) {
 			drawStart_.y = (size_.y) - (size_.y - (scrollPos.y - (worldPos_.y - size_.y / 2)));
 			drawEnd_.y = size_.y - drawStart_.y;
 		}
 
 		// 下端がはみ出ている場合の調整
-		float localBottom = size_.y;
-		if (worldPos_.y + size_.y / 2 > scrollPos.y + viewportHeight) {
-			localBottom = (size_.y / 2 - ((worldPos_.y + size_.y / 2) - (scrollPos.y + viewportHeight))) * 2;
+		float localBottomL = size_.y +plusLocalVertex.LeftBottom.y;
+		float localBottomR = size_.y + plusLocalVertex.RightBottom.y;
+		if (worldPos_.y + localVertex_.LeftBottom.y / 2 > scrollPos.y + viewportHeight) {
+			localBottomL = (localVertex_.LeftBottom.y / 2 - ((worldPos_.y + localVertex_.LeftBottom.y / 2) - (scrollPos.y + viewportHeight))) * 2;
+		}
+		if (worldPos_.y + localVertex_.RightBottom.y / 2 > scrollPos.y + viewportHeight) {
+			localBottomR = (localVertex_.RightBottom.y / 2 - ((worldPos_.y + localVertex_.RightBottom.y / 2) - (scrollPos.y + viewportHeight))) * 2;
+		}
+		if (worldPos_.y + localVertex_.LeftBottom.y / 2 > scrollPos.y + viewportHeight || worldPos_.y + localVertex_.RightBottom.y / 2 > scrollPos.y + viewportHeight) {
 			drawStart_.y = 0;
 			drawEnd_.y = (size_.y - ((worldPos_.y + size_.y / 2) - (scrollPos.y + viewportHeight)));
 		}
-		miniLocalVertex_ = { Vector2(localLeft, localTop),	Vector2(localRight, localTop),
-						     Vector2(localLeft, localBottom),Vector2(localRight, localBottom),
+
+		miniLocalVertex_ = { Vector2(localLeftT, localTopL),	Vector2(localRightT, localTopR),
+							 Vector2(localLeftB , localBottomL),Vector2(localRightB, localBottomR),
 		};
 	}
 }
@@ -123,7 +152,7 @@ void BaseObj::BackGroundDrawRangeCut(Vector2 centerPos, float viewportWidth, flo
 	if (centerPos.y + size_.y / 2 > viewportHeight) {
 		localBottom = (size_.y / 2 - ((centerPos.y + size_.y / 2) - viewportHeight)) * 2;
 	}
-	miniLocalVertex_ = { Vector2(localLeft, localTop),
+	miniLocalVertex_ = { Vector2(localLeft , localTop),
 							Vector2(localRight, localTop),
 							 Vector2(localLeft, localBottom),
 							 Vector2(localRight, localBottom),

@@ -9,7 +9,9 @@
 //class
 #include"Camera.h"
 #include"MiniCamera.h"
+#ifdef  _DEBUG
 #include<imgui.h>
+#endif
 
 Mapchip::Mapchip() {
 
@@ -46,13 +48,14 @@ void Mapchip::fileLoad() {
 }
 
 void Mapchip::Update() {
-
+#ifdef  _DEBUG
 	ImGui::Begin("MapChip");
 	ImGui::DragFloat2("MiniLocal(LeftTop)", &miniLoaclVertex[29][5].LeftTop.x, 0.01f);
 	ImGui::DragFloat2("MiniLocal(RightTop)", &miniLoaclVertex[29][30].RightTop.x, 0.01f);
 	ImGui::DragFloat2("DrawStart", &drawStart_[29][5].x, 0.1f);
 	ImGui::DragFloat2("DrawEnd", &drawEnd_[29][30].x, 0.01f);
 	ImGui::End();
+#endif
 
 	//マップチップの座標取得
 	for (int y = 0; y < mapyMax; y++) {
