@@ -4,8 +4,10 @@
 class Player:public BaseObj{
 private:
 	
-	DIRECTION direction_;
 	GH texture_;
+	GH directionRight_;
+	GH directionLeft_;
+	DIRECTION direction_;
 public:
 	Player();//コンストラクタ
 	~Player();//デストラクタ
@@ -18,6 +20,7 @@ public:
 	void Move();
 	void RenderingPipeline()override;
 	void MiniRenderingPipeline()override;
+	void DrawRangeCut(Vector2 scrollpos, float viewportWidth, float viewportHeight);
 	void MapChipColligion()override;
 
 };

@@ -7,7 +7,9 @@
 
 Player::Player() {
 
-	texture_.Handle = Novice::LoadTexture("white1x1.png");
+	texture_.Handle = 0;
+	directionLeft_.Handle = Novice::LoadTexture("./Resources/LeftBox.png");
+	directionRight_.Handle = Novice::LoadTexture("./Resources/RightBox.png");
 }
 
 Player::~Player() {
@@ -16,7 +18,8 @@ Player::~Player() {
 
 void Player::Init() {
 	BaseObj::Init();
-	worldPos_ = { 48 * 2,48 * 2 };
+	direction_ = RIGHT;
+	worldPos_ = { 48 * 26,48 * 5 };
 	size_ = { 48.0f,48.0f };
 	scale_ = { 1,1 };
 	localVertex_ = MakeLoalVertex(size_);
@@ -37,6 +40,12 @@ void Player::Update() {
 	oldWorldPos_.x = worldPos_.x;
 	oldWorldPos_.y = worldPos_.y;
 	Move();
+	if (direction_ == LEFT) {
+		texture_.Handle = directionLeft_.Handle;
+	}
+	else if (direction_ == RIGHT) {
+		texture_.Handle = directionRight_.Handle;
+	}
 	DrawRangeCut(miniCamera_->GetWorldPos(), camera_->GetViewPort().width * miniCamera_->GetZoomLevel().x, camera_->GetViewPort().height * miniCamera_->GetZoomLevel().y);
 
 }
@@ -50,16 +59,22 @@ void Player::MiniDraw() {
 	bool withinX = (worldPos_.x + size_.x / 2 >= miniCamera_->GetWorldPos().x) && (worldPos_.x - size_.x / 2 <= miniCamera_->GetWorldPos().x + (camera_->GetViewPort().width * miniCamera_->GetZoomLevel().x));
 	bool withinY = (worldPos_.y + size_.y / 2 >= miniCamera_->GetWorldPos().y) && (worldPos_.y - size_.y / 2 <= miniCamera_->GetWorldPos().y + (camera_->GetViewPort().height * miniCamera_->GetZoomLevel().y));
 	if (withinX && withinY) {
-		newDrawQuad(MiniScreenVertex_, 0, 0, size_.x, size_.y, texture_.Handle, RED);
+		newDrawQuad(MiniScreenVertex_, drawStart_.x, drawStart_.y, drawEnd_.x, drawEnd_.y, texture_.Handle, WHITE);
 	}
 }
 
 void Player::Move() {
 	//左右移動
 	if (InputManager::GetIsPressKey(DIK_D)) {
+		if (direction_ == LEFT) {
+			direction_ = RIGHT;
+		}
 		velocity_.x = 4;
 	}
 	else	if (InputManager::GetIsPressKey(DIK_A)) {
+		if (direction_ == RIGHT) {
+			direction_ = LEFT;
+		}
 		velocity_.x = -4;
 	}
 	//ジャンプ
@@ -95,4 +110,9 @@ void Player::MiniRenderingPipeline() {
 //マップチップとの当たり判定
 void Player::MapChipColligion() {
 	BaseObj::MapChipColligion();
+}
+
+void Player::DrawRangeCut(Vector2 scrollpos, float viewportWidth, float viewportHeight) {
+
+	BaseObj::DrawRangeCut(scrollpos, viewportWidth, viewportHeight);
 }
