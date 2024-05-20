@@ -21,7 +21,7 @@ void Monitor::Init() {
 	BaseObj::Init();
 	worldPos_ = { 1200,1000 };
 	size_ = { 48.0f * 7,48.0f * 4 };
-	movePos_ = { 500,300 };
+	movePos_ = { 286,505 };
 	scale_ = { 1,1 };
 	localVertex_ = MakeLoalVertex(size_);
 }

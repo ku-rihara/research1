@@ -17,6 +17,9 @@ private:
 	MiniCamera* miniCamera_;
 	BackGround* backGround_;
 	Monitor* monitor_;
+
+	float et_;
+	GH texture_;
 public:
 	ScenePrototype();//コンストラクタ
 	//Function

@@ -70,5 +70,7 @@ public:
 	void SetWorldPos(Vector2 pos) { this->worldPos_ = pos; }
 	void SetWorldPosX(float pos) { this->worldPos_.x = pos; }
 	void SetWorldPosY(float pos) { this->worldPos_.y = pos; }
+	void SetScaleX(float pos) { this->scale_.x = pos; }
+	void SetScaleY(float pos) { this->scale_.y = pos; }
 };
 
