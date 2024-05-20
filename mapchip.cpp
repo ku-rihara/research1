@@ -9,7 +9,9 @@
 //class
 #include"Camera.h"
 #include"MiniCamera.h"
+#ifdef _DEBUG
 #include<imgui.h>
+#endif // _DEBUG
 
 Mapchip::Mapchip() {
 

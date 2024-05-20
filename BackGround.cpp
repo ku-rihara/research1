@@ -1,7 +1,9 @@
 ﻿#include "BackGround.h"
 #include"BoxRelated.h"
 #include"Matrix3x3.h"
+#ifdef _DEBUG
 #include<imgui.h>
+#endif
 
 BackGround::BackGround() {
 

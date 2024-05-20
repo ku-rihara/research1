@@ -3,7 +3,9 @@
 #include "Player.h"
 #include"BoxRelated.h"
 #include"InputManager.h"
+#ifdef _DEBUG
 #include<imgui.h>
+#endif
 #include"Matrix3x3.h"
 
 Monitor::Monitor() {
@@ -26,12 +28,13 @@ void Monitor::Init() {
 
 //更新
 void Monitor::Update() {
+#ifdef _DEBUG
 	ImGui::Begin("Monitor");
 	ImGui::DragFloat2("MonitorWorldPos", &worldPos_.x, 1.0f);
 	ImGui::DragFloat2("MonitorScale", &scale_.x, 0.01f);
 	ImGui::DragFloat2("MovePos", &movePos_.x, 1.0f);
-
 	ImGui::End();
+#endif
 	oldWorldPos_.x = worldPos_.x;
 	oldWorldPos_.y = worldPos_.y;
 	if (InputManager::GetIsTriggerKey(DIK_SPACE)) {
